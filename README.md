@@ -1,4 +1,4 @@
-#DotnetCore.Playground
+# DotnetCore.Playground
 This project should be used to learn the following concepts to some level:
 
 * Domain Driven Design
