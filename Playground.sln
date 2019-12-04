@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.App", "Playground.App\Playground.App.csproj", "{D53552D3-4508-4BBD-BDD4-2B59287C5599}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Domain", "Playground.Domain\Playground.Domain.csproj", "{CAF55558-2E20-48C3-A5EF-20A0D5AFFA58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Data", "Playground.Data\Playground.Data.csproj", "{024DD814-43AE-4FF8-8C23-1CF0758EE515}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D53552D3-4508-4BBD-BDD4-2B59287C5599}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D53552D3-4508-4BBD-BDD4-2B59287C5599}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D53552D3-4508-4BBD-BDD4-2B59287C5599}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D53552D3-4508-4BBD-BDD4-2B59287C5599}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAF55558-2E20-48C3-A5EF-20A0D5AFFA58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAF55558-2E20-48C3-A5EF-20A0D5AFFA58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAF55558-2E20-48C3-A5EF-20A0D5AFFA58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAF55558-2E20-48C3-A5EF-20A0D5AFFA58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{024DD814-43AE-4FF8-8C23-1CF0758EE515}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{024DD814-43AE-4FF8-8C23-1CF0758EE515}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{024DD814-43AE-4FF8-8C23-1CF0758EE515}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{024DD814-43AE-4FF8-8C23-1CF0758EE515}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
