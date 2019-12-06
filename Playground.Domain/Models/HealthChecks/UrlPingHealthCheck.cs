@@ -8,16 +8,21 @@ namespace Playground.Domain.Models.HealthChecks
 {
     public class UrlPingHealthCheck : HealthCheckAbstract
     {
+        public UrlPingHealthCheck() : base(Constants.HealthChecks.UrlPing)
+        {
+            
+        }
+        
         public UrlPingHealthCheck(string name, string path, int[] validResponses, Dictionary<string, string> headers) : base(Constants.HealthChecks.UrlPing, name)
         {
             Path = path;
-            ValidResponses = validResponses;
-            Headers = headers;
+            ValidResponses = validResponses ?? new int[0];
+            Headers = headers ?? new Dictionary<string, string>();
         }
         
-        private string Path { get; set; }
-        private int[] ValidResponses { get; set; }
-        private Dictionary<string, string> Headers { get; set; }
+        public string Path { get; set; }
+        public int[] ValidResponses { get; set; }
+        public Dictionary<string, string> Headers { get; set; }
         
         protected override Notification<bool> Execute()
         {

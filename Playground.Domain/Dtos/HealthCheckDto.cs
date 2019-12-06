@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
-namespace Playground.Data.Dtos
+namespace Playground.Domain.Dtos
 {
     public class HealthCheckDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
+        public Guid ConfigurationId { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
         public string Path { get; set; }

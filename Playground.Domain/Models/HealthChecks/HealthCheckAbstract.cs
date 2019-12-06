@@ -5,8 +5,18 @@ namespace Playground.Domain.Models.HealthChecks
 {
     public abstract class HealthCheckAbstract
     {
-        public static event EventHandler<HealthCheckEventArgs> OnHealthCheckStart;
-        public static event EventHandler<HealthCheckEventArgs> OnHealthCheckEnd; 
+        public static event EventHandler<HealthCheckEventArgs> OnHealthCheckEnd;
+
+        protected HealthCheckAbstract()
+        {
+            
+        }
+
+        protected HealthCheckAbstract(string alias)
+        {
+            Alias = alias;
+        }
+
         protected HealthCheckAbstract(string alias, string name)
         {
             Alias = alias;
@@ -15,10 +25,10 @@ namespace Playground.Domain.Models.HealthChecks
         
         public string Alias { get; }
         public string Name { get; }
+        public Guid Id { get; set; }
 
         public Notification Run()
         {
-            OnHealthCheckStart?.Invoke(this, new HealthCheckEventArgs(this));
             var notification = Execute();
             OnHealthCheckEnd?.Invoke(this, new HealthCheckEventArgs(this, notification));
 

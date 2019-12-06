@@ -5,11 +5,6 @@ namespace Playground.Domain.EventArgs
 {
     public class HealthCheckEventArgs : System.EventArgs
     {
-        public HealthCheckEventArgs(HealthCheckAbstract healthCheck)
-        {
-            HealthCheck = healthCheck;
-        }
-
         public HealthCheckEventArgs(HealthCheckAbstract healthCheck, Notification notification)
         {
             HealthCheck = healthCheck;

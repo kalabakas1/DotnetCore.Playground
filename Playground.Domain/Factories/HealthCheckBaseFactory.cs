@@ -1,6 +1,5 @@
-﻿using Playground.Data;
-using Playground.Data.Dtos;
-using Playground.Domain.Constants;
+﻿using Playground.Domain.Constants;
+using Playground.Domain.Dtos;
 using Playground.Domain.Models;
 using Playground.Domain.Models.HealthChecks;
 

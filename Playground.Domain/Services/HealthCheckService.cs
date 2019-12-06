@@ -2,6 +2,7 @@
 using Playground.Domain.Extensions;
 using Playground.Domain.Factories;
 using Playground.Domain.Models;
+using Playground.Domain.Models.HealthChecks;
 
 namespace Playground.Domain.Services
 {
@@ -14,7 +15,7 @@ namespace Playground.Domain.Services
             _reportFactory = reportFactory;
         }
         
-        public Report Execute(MonitoringConfiguration configuration)
+        public Report Execute(HealthCheckConfiguration configuration)
         {
             using(var report = _reportFactory.Create(GetType()))
             {
