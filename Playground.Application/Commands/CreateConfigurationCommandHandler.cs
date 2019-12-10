@@ -15,10 +15,10 @@ using Playground.Domain.Repositories;
 
 namespace Playground.Application.Commands
 {
-    public class CreateConfigurationCommandHandler : IRequestHandler<CreateConfigurationCommand, Guid>
+    public class CreateConfigurationCommandHandler : IRequestHandler<CreateConfigurationCommand, Notification<Guid>>
     {
         private readonly IHealthCheckConfigurationRepository _healthCheckConfigurationRepository;
-        private readonly IEnumerable<IHealthCheckFactory> _healthCheckFactories;
+        private readonly HashSet<IHealthCheckFactory> _healthCheckFactories;
         private readonly IEnumerable<SubscriptionTypeAbstract> _subscriptionTypeAbstracts;
 
         public CreateConfigurationCommandHandler(
@@ -27,47 +27,53 @@ namespace Playground.Application.Commands
             IEnumerable<SubscriptionTypeAbstract> subscriptionTypeAbstracts)
         {
             _healthCheckConfigurationRepository = healthCheckConfigurationRepository;
-            _healthCheckFactories = healthCheckFactories;
+            _healthCheckFactories = new HashSet<IHealthCheckFactory>(healthCheckFactories);
             _subscriptionTypeAbstracts = subscriptionTypeAbstracts;
         }
         
-        public Task<Guid> Handle(CreateConfigurationCommand request, CancellationToken cancellationToken)
+        public Task<Notification<Guid>> Handle(CreateConfigurationCommand request, CancellationToken cancellationToken)
         {
             return Task.Run(() =>
             {
+                var notification = new Notification<Guid>();
                 var healthChecks = new List<HealthCheckAbstract>();
                 foreach (var requestHealthCheck in request.HealthChecks ?? new List<HealthCheckDto>())
                 {
                     var factory = _healthCheckFactories.FirstOrDefault(x => x.Type == requestHealthCheck.Type);
                     if (factory == null)
                     {
-                        throw new ArgumentException(
-                            $"{ExceptionMessage.NoValueFound}: {nameof(requestHealthCheck.Type)}");
+                        notification.AddError($"{ExceptionMessage.NoValueFound}: {nameof(requestHealthCheck.Type)}");
                     }
-
-                    var healthCheckNotification = factory.Create(requestHealthCheck);
-                    if (healthCheckNotification.HasError())
+                    else
                     {
-                        throw new ArgumentException(healthCheckNotification.ToString());
-                    }
 
-                    healthChecks.Add(healthCheckNotification.Value);
+                        var healthCheckNotification = factory.Create(requestHealthCheck);
+                        if (healthCheckNotification.HasError())
+                        {
+                            notification.AddError(healthCheckNotification.ToString());
+                        }
+
+                        healthChecks.Add(healthCheckNotification.Value);
+                    }
                 }
 
                 var subscription = _subscriptionTypeAbstracts.FirstOrDefault(x =>
                     x.Type.Equals(request.SubscriptionTypeName, StringComparison.InvariantCultureIgnoreCase));
                 if (subscription == null)
                 {
-                    throw new ArgumentException(
-                        $"{ExceptionMessage.NoValueFound}: {nameof(request.SubscriptionTypeName)}");
+                    notification.AddError($"{ExceptionMessage.NoValueFound}: {nameof(request.SubscriptionTypeName)}");
                 }
 
                 var configuration = new HealthCheckConfiguration(request.Retries, request.SleepInMillsBetweenRetry,
                     healthChecks, subscription);
 
-                _healthCheckConfigurationRepository.Add(configuration);
+                if (!notification.HasError())
+                {
+                    notification.Value = configuration.Id;
+                    _healthCheckConfigurationRepository.Add(configuration);
+                }
 
-                return configuration.Id;
+                return notification;
             }, cancellationToken);
         }
     }

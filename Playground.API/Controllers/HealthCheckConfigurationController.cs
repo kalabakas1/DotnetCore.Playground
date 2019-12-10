@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Playground.API.Extensions;
 using Playground.Application.Commands;
 
 namespace Playground.API.Controllers
@@ -17,8 +18,17 @@ namespace Playground.API.Controllers
         {
             _mediator = mediator;
         }
-        
+
         [HttpPost]
-        public Task<Guid> CreateConfiguration([FromBody] CreateConfigurationCommand request) => _mediator.Send(request);
+        public IActionResult CreateConfiguration([FromBody] CreateConfigurationCommand request)
+        {
+            var response = _mediator.Send(request).Result;
+            if (response.HasError())
+            {
+                return BadRequest(response.ConvertToHttpError(400));
+            }
+
+            return Ok(response.Value);
+        }
     }
 }

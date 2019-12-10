@@ -50,7 +50,7 @@ namespace Playground.Domain.Models
         public override string ToString()
         {
             return
-                $"Error: {HasError()} \n {string.Join("\n", Errors?.Select(x => x.Message ?? string.Empty).ToList() ?? new List<string>())}";
+                $"Error: {HasError()}\n{string.Join("\n", Errors?.Select(x => x.Message ?? string.Empty).ToList() ?? new List<string>())}";
         }
 
         public class Error
