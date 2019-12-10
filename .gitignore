@@ -35,3 +35,9 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+
+Playground.App/Database.db
+
+Playground.App/Database.db-shm
+
+Playground.App/Database.db-wal

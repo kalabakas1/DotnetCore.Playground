@@ -12,7 +12,7 @@ namespace Playground.Data.Extensions
             serviceCollection.AddEntityFrameworkSqlite().AddDbContext<HealthCheckConfigurationContext>();
             
             return serviceCollection
-                .AddSingleton(typeof(IHealthCheckConfigurationRepository), typeof(HealthCheckConfigurationRepository));
+                .AddScoped(typeof(IHealthCheckConfigurationRepository), typeof(HealthCheckConfigurationRepository));
         } 
     }
 }

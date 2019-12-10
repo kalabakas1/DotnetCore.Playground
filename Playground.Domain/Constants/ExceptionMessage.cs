@@ -1,6 +1,6 @@
 ﻿namespace Playground.Domain.Constants
 {
-    internal static class ExceptionMessage
+    public static class ExceptionMessage
     {
         public const string NotValidUrl = "The defined URL {0} is not valid";
         public const string ParameterMustBeDefined = "The following parameter must be defined: {0}";

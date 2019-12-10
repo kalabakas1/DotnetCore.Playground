@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Playground.API.Application.Commands;
+using Playground.Application.Commands;
 
 namespace Playground.API.Controllers
 {
@@ -9,10 +11,14 @@ namespace Playground.API.Controllers
     [Route("api/Configuration")]
     public class HealthCheckConfigurationController : Controller
     {
-        [HttpPost]
-        public ObjectResult CreateHealthCheckConfiguration([FromBody] CreateConfigurationCommand createConfigurationCommand)
+        private readonly IMediator _mediator;
+
+        public HealthCheckConfigurationController(IMediator mediator)
         {
-            return Ok(Guid.NewGuid());
+            _mediator = mediator;
         }
+        
+        [HttpPost]
+        public Task<Guid> CreateConfiguration([FromBody] CreateConfigurationCommand request) => _mediator.Send(request);
     }
 }

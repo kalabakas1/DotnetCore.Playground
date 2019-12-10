@@ -24,7 +24,7 @@ namespace Playground.Data.Repositories
         public HealthCheckConfiguration GetById(Guid id)
         {
             var configuration = _context.HealthCheckConfigurations
-                .Include(x => x.HealthChecks)
+                .Include(x => x.HealthChecks)    
                 .FirstOrDefault(x => x.Id.Equals(id));
 
             if (configuration == null)
@@ -40,6 +40,15 @@ namespace Playground.Data.Repositories
 
         public void Add(HealthCheckConfiguration configuration)
         {
+            if (configuration != null)
+            {
+                var type = _context.SubscriptionAbstracts.FirstOrDefault(x => x.Id == configuration.SubscriptionType.Id);
+                if (type != null)
+                {
+                    configuration.SubscriptionType = type;
+                }
+            }
+            
             _context.HealthCheckConfigurations.Add(configuration);
             _context.SaveChanges(); 
         }

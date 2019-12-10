@@ -47,6 +47,12 @@ namespace Playground.Domain.Models
             return Errors.Any();
         }
 
+        public override string ToString()
+        {
+            return
+                $"Error: {HasError()} \n {string.Join("\n", Errors?.Select(x => x.Message ?? string.Empty).ToList() ?? new List<string>())}";
+        }
+
         public class Error
         {
             public string Message { get; }

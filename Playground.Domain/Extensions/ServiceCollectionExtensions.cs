@@ -11,12 +11,14 @@ namespace Playground.Domain.Extensions
     {
         public static IServiceCollection RegisterDomainDependencies(this IServiceCollection collection)
         {
-            return collection.AddSingleton<IHealthCheckFactory, UrlHealthCheckFactory>()
-                .AddSingleton<IHealthCheckConfigurationFactory, HealthCheckConfigurationFactory>()
-                .AddSingleton<IReportFactory, ReportFactory>()
+            return collection.AddScoped<IHealthCheckFactory, UrlHealthCheckFactory>()
+//                .AddSingleton<IHealthCheckConfigurationFactory, HealthCheckConfigurationFactory>()
+                .AddScoped<IReportFactory, ReportFactory>()
                 .AddScoped<HealthCheckAbstract, UrlPingHealthCheck>()
                 .AddScoped<HealthCheckAbstract, DefaultHealthCheck>()
-                .AddSingleton<IHealthCheckService, HealthCheckService>();
+                .AddScoped<SubscriptionTypeAbstract, LimitedHealthCheckSubscriptionType>()
+                .AddScoped<SubscriptionTypeAbstract, TwoOfEachSubscriptionType>()
+                .AddScoped<IHealthCheckService, HealthCheckService>();
         } 
     }
 } 

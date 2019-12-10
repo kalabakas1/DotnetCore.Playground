@@ -8,4 +8,9 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Factories\HealthCheckConfigurationFactory.cs" />
+    <Compile Remove="Factories\IHealthCheckConfigurationFactory.cs" />
+  </ItemGroup>
+
 </Project>

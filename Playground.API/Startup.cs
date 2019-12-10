@@ -10,6 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Playground.Application.Extensions;
+using Playground.Data.Extensions;
+using Playground.Domain.Extensions;
 
 namespace Playground.API
 {
@@ -26,6 +29,10 @@ namespace Playground.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services
+                .RegisterDomainDependencies()
+                .RegisterRepositories()
+                .RegisterCommandHandlerDependencies();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,6 +45,7 @@ namespace Playground.API
 
             //app.UseHttpsRedirection();
 
+            
             app.UseRouting();
 
             app.UseAuthorization();
