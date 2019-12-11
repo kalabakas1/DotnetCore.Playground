@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
+using Playground.API.Extensions;
 using Playground.Application.Extensions;
 using Playground.Data.Extensions;
 using Playground.Domain.Extensions;
@@ -29,6 +31,9 @@ namespace Playground.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.SetupSwagger();
+
             services
                 .RegisterDomainDependencies()
                 .RegisterRepositories()
@@ -43,9 +48,10 @@ namespace Playground.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.SetupSwagger();
+
             //app.UseHttpsRedirection();
 
-            
             app.UseRouting();
 
             app.UseAuthorization();

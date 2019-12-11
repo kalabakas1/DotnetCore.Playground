@@ -19,6 +19,11 @@ namespace Playground.API.Controllers
             _mediator = mediator;
         }
 
+        /// <summary>
+        /// Create new configuration
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult CreateConfiguration([FromBody] CreateConfigurationCommand request)
         {
