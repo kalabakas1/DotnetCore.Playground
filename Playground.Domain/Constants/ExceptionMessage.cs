@@ -8,5 +8,6 @@
         public const string NoValueFound = "No valid value found";
         public const string NotCorrectResult = "Did not return expected result - returned: {0}";
         public const string ObjectNull = "Object not initialized: {0}";
+        public const string MustContainValue = "Must contain one of the following values: {0}";
     }
 }

@@ -3,8 +3,10 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Playground.API.Extensions;
 using Playground.Application.Commands;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Playground.API.Controllers
 {
@@ -25,6 +27,11 @@ namespace Playground.API.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
+        [SwaggerOperation(
+            Summary = "Create a new configuration",
+            OperationId = "CreateConfiguration",
+            Tags = new []{"Configuration"})]
+        [SwaggerResponse(200, "Configuration created", typeof(Guid))]
         public IActionResult CreateConfiguration([FromBody] CreateConfigurationCommand request)
         {
             var response = _mediator.Send(request).Result;

@@ -12,7 +12,6 @@ namespace Playground.Domain.Extensions
         public static IServiceCollection RegisterDomainDependencies(this IServiceCollection collection)
         {
             return collection.AddScoped<IHealthCheckFactory, UrlHealthCheckFactory>()
-//                .AddSingleton<IHealthCheckConfigurationFactory, HealthCheckConfigurationFactory>()
                 .AddScoped<IReportFactory, ReportFactory>()
                 .AddScoped<HealthCheckAbstract, UrlPingHealthCheck>()
                 .AddScoped<HealthCheckAbstract, DefaultHealthCheck>()

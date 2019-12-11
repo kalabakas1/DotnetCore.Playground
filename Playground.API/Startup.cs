@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,6 +34,8 @@ namespace Playground.API
             services.AddControllers();
 
             services.SetupSwagger();
+
+            services.SetupValidation();
 
             services
                 .RegisterDomainDependencies()

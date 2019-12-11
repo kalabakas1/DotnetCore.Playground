@@ -1,9 +1,13 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using Playground.API.Filters;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Playground.API.Extensions
 {
@@ -11,12 +15,15 @@ namespace Playground.API.Extensions
     {
         public static IServiceCollection SetupSwagger(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSwaggerGen(c =>
+            serviceCollection.AddSwaggerGen(config =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "My API", Version = "v1"}); 
+                config.SwaggerDoc("v1", new OpenApiInfo {Title = "My API", Version = "v1"});
+                
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);
+                config.IncludeXmlComments(xmlPath);
+                
+                config.AddFluentValidationRules();
             });
                 
             return serviceCollection;
@@ -26,12 +33,24 @@ namespace Playground.API.Extensions
         {
             app.UseSwagger();
 
-            app.UseSwaggerUI(c =>
+            app.UseSwaggerUI(config =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                config.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                config.DisplayOperationId();
+                config.DisplayRequestDuration();
+                config.EnableDeepLinking();
             });
 
             return app;
+        }
+
+        public static IServiceCollection SetupValidation(this IServiceCollection serviceCollection)
+        {
+            serviceCollection.AddMvc(config =>
+            {
+                config.Filters.Add(typeof(ValidatorActionFilter));
+            }).AddFluentValidation(config => config.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies().Where(x => x.FullName.Contains("Playground."))));
+            return serviceCollection;
         }
     }
 }
