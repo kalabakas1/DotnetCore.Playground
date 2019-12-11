@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using MediatR;
@@ -37,7 +38,7 @@ namespace Playground.API.Controllers
             var response = _mediator.Send(request).Result;
             if (response.HasError())
             {
-                return BadRequest(response.ConvertToHttpError(400));
+                return BadRequest(response.ToHttpError(HttpStatusCode.BadRequest));
             }
 
             return Ok(response.Value);

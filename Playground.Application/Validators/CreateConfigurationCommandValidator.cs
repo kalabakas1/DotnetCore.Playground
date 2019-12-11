@@ -14,7 +14,7 @@ namespace Playground.Application.Validators
         private readonly IEnumerable<IHealthCheckFactory> _healthCheckFactories;
 
         public CreateConfigurationCommandValidator(
-            IEnumerable<SubscriptionTypeAbstract> subscriptionTypeAbstracts ,
+            IEnumerable<SubscriptionTypeAbstract> subscriptionTypeAbstracts,
             IEnumerable<IHealthCheckFactory> healthCheckFactories)
         {
             _subscriptionTypeAbstracts = subscriptionTypeAbstracts;

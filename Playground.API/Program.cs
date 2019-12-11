@@ -18,6 +18,10 @@ namespace Playground.API
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseDefaultServiceProvider(options => options.ValidateScopes = false)
+                        .UseStartup<Startup>();
+                });
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Playground.API.Filters;
 using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Playground.API.Extensions
 {
@@ -25,7 +26,7 @@ namespace Playground.API.Extensions
                 
                 config.AddFluentValidationRules();
             });
-                
+            
             return serviceCollection;
         }
 
