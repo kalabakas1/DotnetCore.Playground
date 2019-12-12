@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.API", "Playgroun
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Application", "Playground.Application\Playground.Application.csproj", "{0DF1DDE8-8A8E-47F6-9066-686D27C11DFC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.BlazorServerApp", "Playground.BlazorServerApp\Playground.BlazorServerApp.csproj", "{38C75FF8-2D97-4272-8CFB-1753E4BAF827}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{0DF1DDE8-8A8E-47F6-9066-686D27C11DFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DF1DDE8-8A8E-47F6-9066-686D27C11DFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DF1DDE8-8A8E-47F6-9066-686D27C11DFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38C75FF8-2D97-4272-8CFB-1753E4BAF827}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38C75FF8-2D97-4272-8CFB-1753E4BAF827}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38C75FF8-2D97-4272-8CFB-1753E4BAF827}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38C75FF8-2D97-4272-8CFB-1753E4BAF827}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
