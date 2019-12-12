@@ -16,7 +16,7 @@ namespace Playground.Application.Validators
             var healthChecks = new HashSet<string>(healthCheckFactories.Select(x => x.Type));
 
             RuleFor(x => x.Name).NotNull();
-            RuleFor(x => x.Type).LimitedChoice(healthChecks);
+            RuleFor(x => x.Type).LimitedChoice(healthChecks).NotNull();
         }
     }
 }

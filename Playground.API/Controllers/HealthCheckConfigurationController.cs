@@ -25,6 +25,9 @@ namespace Playground.API.Controllers
         /// <summary>
         /// Create new configuration
         /// </summary>
+        /// <remarks>
+        /// Used to create an entirely new configuration item:
+        /// </remarks>
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
