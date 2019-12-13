@@ -28,6 +28,50 @@ namespace Playground.Api.Client.Api
     {
         #region Synchronous Operations
         /// <summary>
+        /// Get a paged result of configurations
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="pageNumber"> (optional)</param>
+        /// <param name="pageSize"> (optional)</param>
+        /// <returns>List&lt;ConfigurationView&gt;</returns>
+        List<ConfigurationView> ApiConfigurationGet (int? pageNumber = default(int?), int? pageSize = default(int?));
+
+        /// <summary>
+        /// Get a paged result of configurations
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="pageNumber"> (optional)</param>
+        /// <param name="pageSize"> (optional)</param>
+        /// <returns>ApiResponse of List&lt;ConfigurationView&gt;</returns>
+        ApiResponse<List<ConfigurationView>> ApiConfigurationGetWithHttpInfo (int? pageNumber = default(int?), int? pageSize = default(int?));
+        /// <summary>
+        /// Get configuration
+        /// </summary>
+        /// <remarks>
+        /// Gets the configuration by the GUID id returned at creation
+        /// </remarks>
+        /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns>ConfigurationView</returns>
+        ConfigurationView ApiConfigurationIdGet (Guid id);
+
+        /// <summary>
+        /// Get configuration
+        /// </summary>
+        /// <remarks>
+        /// Gets the configuration by the GUID id returned at creation
+        /// </remarks>
+        /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns>ApiResponse of ConfigurationView</returns>
+        ApiResponse<ConfigurationView> ApiConfigurationIdGetWithHttpInfo (Guid id);
+        /// <summary>
         /// Create new configuration
         /// </summary>
         /// <remarks>
@@ -57,6 +101,50 @@ namespace Playground.Api.Client.Api
     public interface IHealthCheckConfigurationApiAsync : IApiAccessor
     {
         #region Asynchronous Operations
+        /// <summary>
+        /// Get a paged result of configurations
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="pageNumber"> (optional)</param>
+        /// <param name="pageSize"> (optional)</param>
+        /// <returns>Task of List&lt;ConfigurationView&gt;</returns>
+        System.Threading.Tasks.Task<List<ConfigurationView>> ApiConfigurationGetAsync (int? pageNumber = default(int?), int? pageSize = default(int?));
+
+        /// <summary>
+        /// Get a paged result of configurations
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="pageNumber"> (optional)</param>
+        /// <param name="pageSize"> (optional)</param>
+        /// <returns>Task of ApiResponse (List&lt;ConfigurationView&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<ConfigurationView>>> ApiConfigurationGetAsyncWithHttpInfo (int? pageNumber = default(int?), int? pageSize = default(int?));
+        /// <summary>
+        /// Get configuration
+        /// </summary>
+        /// <remarks>
+        /// Gets the configuration by the GUID id returned at creation
+        /// </remarks>
+        /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns>Task of ConfigurationView</returns>
+        System.Threading.Tasks.Task<ConfigurationView> ApiConfigurationIdGetAsync (Guid id);
+
+        /// <summary>
+        /// Get configuration
+        /// </summary>
+        /// <remarks>
+        /// Gets the configuration by the GUID id returned at creation
+        /// </remarks>
+        /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns>Task of ApiResponse (ConfigurationView)</returns>
+        System.Threading.Tasks.Task<ApiResponse<ConfigurationView>> ApiConfigurationIdGetAsyncWithHttpInfo (Guid id);
         /// <summary>
         /// Create new configuration
         /// </summary>
@@ -199,6 +287,276 @@ namespace Playground.Api.Client.Api
         }
 
         /// <summary>
+        /// Get a paged result of configurations 
+        /// </summary>
+        /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="pageNumber"> (optional)</param>
+        /// <param name="pageSize"> (optional)</param>
+        /// <returns>List&lt;ConfigurationView&gt;</returns>
+        public List<ConfigurationView> ApiConfigurationGet (int? pageNumber = default(int?), int? pageSize = default(int?))
+        {
+             Playground.Api.Client.Client.ApiResponse<List<ConfigurationView>> localVarResponse = ApiConfigurationGetWithHttpInfo(pageNumber, pageSize);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get a paged result of configurations 
+        /// </summary>
+        /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="pageNumber"> (optional)</param>
+        /// <param name="pageSize"> (optional)</param>
+        /// <returns>ApiResponse of List&lt;ConfigurationView&gt;</returns>
+        public Playground.Api.Client.Client.ApiResponse< List<ConfigurationView> > ApiConfigurationGetWithHttpInfo (int? pageNumber = default(int?), int? pageSize = default(int?))
+        {
+            Playground.Api.Client.Client.RequestOptions localVarRequestOptions = new Playground.Api.Client.Client.RequestOptions();
+
+            String[] _contentTypes = new String[] {
+            };
+
+            // to determine the Accept header
+            String[] _accepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+
+            var localVarContentType = Playground.Api.Client.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = Playground.Api.Client.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            if (pageNumber != null)
+            {
+                foreach (var _kvp in Playground.Api.Client.Client.ClientUtils.ParameterToMultiMap("", "PageNumber", pageNumber))
+                {
+                    foreach (var _kvpValue in _kvp.Value)
+                    {
+                        localVarRequestOptions.QueryParameters.Add(_kvp.Key, _kvpValue);
+                    }
+                }
+            }
+            if (pageSize != null)
+            {
+                foreach (var _kvp in Playground.Api.Client.Client.ClientUtils.ParameterToMultiMap("", "PageSize", pageSize))
+                {
+                    foreach (var _kvpValue in _kvp.Value)
+                    {
+                        localVarRequestOptions.QueryParameters.Add(_kvp.Key, _kvpValue);
+                    }
+                }
+            }
+
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get< List<ConfigurationView> >("/api/Configuration", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ApiConfigurationGet", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get a paged result of configurations 
+        /// </summary>
+        /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="pageNumber"> (optional)</param>
+        /// <param name="pageSize"> (optional)</param>
+        /// <returns>Task of List&lt;ConfigurationView&gt;</returns>
+        public async System.Threading.Tasks.Task<List<ConfigurationView>> ApiConfigurationGetAsync (int? pageNumber = default(int?), int? pageSize = default(int?))
+        {
+             Playground.Api.Client.Client.ApiResponse<List<ConfigurationView>> localVarResponse = await ApiConfigurationGetAsyncWithHttpInfo(pageNumber, pageSize);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Get a paged result of configurations 
+        /// </summary>
+        /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="pageNumber"> (optional)</param>
+        /// <param name="pageSize"> (optional)</param>
+        /// <returns>Task of ApiResponse (List&lt;ConfigurationView&gt;)</returns>
+        public async System.Threading.Tasks.Task<Playground.Api.Client.Client.ApiResponse<List<ConfigurationView>>> ApiConfigurationGetAsyncWithHttpInfo (int? pageNumber = default(int?), int? pageSize = default(int?))
+        {
+
+            Playground.Api.Client.Client.RequestOptions localVarRequestOptions = new Playground.Api.Client.Client.RequestOptions();
+
+            String[] _contentTypes = new String[] {
+            };
+
+            // to determine the Accept header
+            String[] _accepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            
+            foreach (var _contentType in _contentTypes)
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", _contentType);
+            
+            foreach (var _accept in _accepts)
+                localVarRequestOptions.HeaderParameters.Add("Accept", _accept);
+            
+            if (pageNumber != null)
+            {
+                foreach (var _kvp in Playground.Api.Client.Client.ClientUtils.ParameterToMultiMap("", "PageNumber", pageNumber))
+                {
+                    foreach (var _kvpValue in _kvp.Value)
+                    {
+                        localVarRequestOptions.QueryParameters.Add(_kvp.Key, _kvpValue);
+                    }
+                }
+            }
+            if (pageSize != null)
+            {
+                foreach (var _kvp in Playground.Api.Client.Client.ClientUtils.ParameterToMultiMap("", "PageSize", pageSize))
+                {
+                    foreach (var _kvpValue in _kvp.Value)
+                    {
+                        localVarRequestOptions.QueryParameters.Add(_kvp.Key, _kvpValue);
+                    }
+                }
+            }
+
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.GetAsync<List<ConfigurationView>>("/api/Configuration", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ApiConfigurationGet", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get configuration Gets the configuration by the GUID id returned at creation
+        /// </summary>
+        /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns>ConfigurationView</returns>
+        public ConfigurationView ApiConfigurationIdGet (Guid id)
+        {
+             Playground.Api.Client.Client.ApiResponse<ConfigurationView> localVarResponse = ApiConfigurationIdGetWithHttpInfo(id);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get configuration Gets the configuration by the GUID id returned at creation
+        /// </summary>
+        /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns>ApiResponse of ConfigurationView</returns>
+        public Playground.Api.Client.Client.ApiResponse< ConfigurationView > ApiConfigurationIdGetWithHttpInfo (Guid id)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new Playground.Api.Client.Client.ApiException(400, "Missing required parameter 'id' when calling HealthCheckConfigurationApi->ApiConfigurationIdGet");
+
+            Playground.Api.Client.Client.RequestOptions localVarRequestOptions = new Playground.Api.Client.Client.RequestOptions();
+
+            String[] _contentTypes = new String[] {
+            };
+
+            // to determine the Accept header
+            String[] _accepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+
+            var localVarContentType = Playground.Api.Client.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = Playground.Api.Client.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            if (id != null)
+                localVarRequestOptions.PathParameters.Add("id", Playground.Api.Client.Client.ClientUtils.ParameterToString(id)); // path parameter
+
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get< ConfigurationView >("/api/Configuration/{id}", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ApiConfigurationIdGet", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get configuration Gets the configuration by the GUID id returned at creation
+        /// </summary>
+        /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns>Task of ConfigurationView</returns>
+        public async System.Threading.Tasks.Task<ConfigurationView> ApiConfigurationIdGetAsync (Guid id)
+        {
+             Playground.Api.Client.Client.ApiResponse<ConfigurationView> localVarResponse = await ApiConfigurationIdGetAsyncWithHttpInfo(id);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Get configuration Gets the configuration by the GUID id returned at creation
+        /// </summary>
+        /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id"></param>
+        /// <returns>Task of ApiResponse (ConfigurationView)</returns>
+        public async System.Threading.Tasks.Task<Playground.Api.Client.Client.ApiResponse<ConfigurationView>> ApiConfigurationIdGetAsyncWithHttpInfo (Guid id)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new Playground.Api.Client.Client.ApiException(400, "Missing required parameter 'id' when calling HealthCheckConfigurationApi->ApiConfigurationIdGet");
+
+
+            Playground.Api.Client.Client.RequestOptions localVarRequestOptions = new Playground.Api.Client.Client.RequestOptions();
+
+            String[] _contentTypes = new String[] {
+            };
+
+            // to determine the Accept header
+            String[] _accepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            
+            foreach (var _contentType in _contentTypes)
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", _contentType);
+            
+            foreach (var _accept in _accepts)
+                localVarRequestOptions.HeaderParameters.Add("Accept", _accept);
+            
+            if (id != null)
+                localVarRequestOptions.PathParameters.Add("id", Playground.Api.Client.Client.ClientUtils.ParameterToString(id)); // path parameter
+
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.GetAsync<ConfigurationView>("/api/Configuration/{id}", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ApiConfigurationIdGet", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
         /// Create new configuration Used to create an entirely new configuration item:
         /// </summary>
         /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
@@ -223,7 +581,8 @@ namespace Playground.Api.Client.Api
             String[] _contentTypes = new String[] {
                 "application/json", 
                 "text/json", 
-                "application/_*+json"
+                "application/_*+json", 
+                "application/json-patch+json"
             };
 
             // to determine the Accept header
@@ -281,7 +640,8 @@ namespace Playground.Api.Client.Api
             String[] _contentTypes = new String[] {
                 "application/json", 
                 "text/json", 
-                "application/_*+json"
+                "application/_*+json", 
+                "application/json-patch+json"
             };
 
             // to determine the Accept header

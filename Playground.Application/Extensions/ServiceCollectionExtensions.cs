@@ -3,6 +3,7 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Playground.Application.Commands;
+using Playground.Application.Queries;
 using Playground.Application.Validators;
 using Playground.Domain.Dtos;
 using Playground.Domain.Models.HealthChecks;
@@ -15,6 +16,7 @@ namespace Playground.Application.Extensions
         {
             return collection.AddMediatR(Assembly.GetExecutingAssembly())
                 .AddTransient<IValidator<CreateConfigurationCommand>, CreateConfigurationCommandValidator>()
+                .AddTransient<IConfigurationQueries, ConfigurationQueries>()
                 
                 .AddTransient<IValidator<HealthCheckDto>, HealthCheckDtoValidator>()
                 

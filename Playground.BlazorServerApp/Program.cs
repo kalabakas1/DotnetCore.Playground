@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace Playground.BlazorServerApp
     {
         public static void Main(string[] args)
         {
+            Console.WriteLine(Process.GetCurrentProcess().Id);
             CreateHostBuilder(args).Build().Run();
         }
 

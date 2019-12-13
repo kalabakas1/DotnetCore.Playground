@@ -32,24 +32,10 @@ namespace Playground.Api.Client.Model
     public partial class HealthCheckDto :  IEquatable<HealthCheckDto>, IValidatableObject
     {
         /// <summary>
-        /// Defines Type
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum TypeEnum
-        {
-            /// <summary>
-            /// Enum UrlPing for value: UrlPing
-            /// </summary>
-            [EnumMember(Value = "UrlPing")]
-            UrlPing = 1
-
-        }
-
-        /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=true)]
-        public TypeEnum Type { get; set; }
+        [DataMember(Name="type", EmitDefaultValue=false)]
+        public HealthChecks Type { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="HealthCheckDto" /> class.
         /// </summary>
@@ -63,7 +49,7 @@ namespace Playground.Api.Client.Model
         /// <param name="path">path.</param>
         /// <param name="validResponses">validResponses.</param>
         /// <param name="headers">headers.</param>
-        public HealthCheckDto(string name = default(string), TypeEnum type = default(TypeEnum), string path = default(string), List<int> validResponses = default(List<int>), Dictionary<string, string> headers = default(Dictionary<string, string>))
+        public HealthCheckDto(string name = default(string), HealthChecks type = default(HealthChecks), string path = default(string), List<int> validResponses = default(List<int>), Dictionary<string, string> headers = default(Dictionary<string, string>))
         {
             this.Name = name;
             this.Type = type;
@@ -203,6 +189,12 @@ namespace Playground.Api.Client.Model
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // Name (string) minLength
+            if(this.Name != null && this.Name.Length < 1)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Name, length must be greater than 1.", new [] { "Name" });
+            }
+
             yield break;
         }
     }

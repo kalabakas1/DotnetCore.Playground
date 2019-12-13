@@ -8,6 +8,8 @@ cd ..\$apiProjectName
 Start-Process dotnet run
 cd ..\openapi-generator
 
+Start-Sleep -Seconds 5
+
 $swaggerResponse = Invoke-WebRequest $swaggerPath
 
 .\Generate-Client.ps1 -swaggerJsonPath $swaggerPath -projectName $projectName -srcFolderPath ..\

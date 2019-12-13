@@ -2,7 +2,6 @@
 using System.Linq;
 using FluentValidation;
 using Playground.Application.Commands;
-using Playground.Application.Validators.Extensions;
 using Playground.Domain.Constants;
 using Playground.Domain.Dtos;
 using Playground.Domain.Factories;
@@ -15,7 +14,7 @@ namespace Playground.Application.Validators
         public CreateConfigurationCommandValidator(
             IValidator<HealthCheckDto> healthCheckDtoValidator)
         {
-            
+            RuleFor(x => x.Name).NotNull().NotEmpty();
             RuleFor(x => x.Retries).GreaterThanOrEqualTo(0);
             RuleFor(x => x.SleepInMillsBetweenRetry).GreaterThanOrEqualTo(0);
             RuleFor(x => x.SubscriptionTypeName).IsInEnum().NotNull();

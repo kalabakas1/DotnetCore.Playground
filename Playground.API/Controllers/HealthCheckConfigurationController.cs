@@ -1,31 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Playground.API.Extensions;
 using Playground.Application.Commands;
+using Playground.Application.Queries;
 using Playground.Domain.Models.HealthChecks;
 using Playground.Domain.Repositories;
 using Swashbuckle.AspNetCore.Annotations;
+using Route = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
 namespace Playground.API.Controllers
 {
     [ApiController]
-    [Route("api/Configuration")]
+    [Microsoft.AspNetCore.Mvc.Route("api/Configuration")]
     public class HealthCheckConfigurationController : Controller
     {
         private readonly IMediator _mediator;
-        private readonly IHealthCheckConfigurationRepository _healthCheckConfigurationRepository;
+        private readonly IConfigurationQueries _configurationQueries;
 
         public HealthCheckConfigurationController(
             IMediator mediator,
-            IHealthCheckConfigurationRepository healthCheckConfigurationRepository)
+            IConfigurationQueries configurationQueries)
         {
             _mediator = mediator;
-            _healthCheckConfigurationRepository = healthCheckConfigurationRepository;
+            _configurationQueries = configurationQueries;
         }
 
         /// <summary>
@@ -38,9 +42,8 @@ namespace Playground.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [SwaggerOperation(
-            Summary = "Create a new configuration",
             OperationId = "CreateConfiguration",
-            Tags = new []{"Configuration"})]
+            Tags = new[] {"Configuration"})]
         [SwaggerResponse(200, "Configuration created", typeof(Guid))]
         public IActionResult CreateConfiguration([FromBody] CreateConfigurationCommand request)
         {
@@ -62,20 +65,37 @@ namespace Playground.API.Controllers
         /// </remarks>
         /// <param name="id"></param>
         /// <returns></returns>
+        [Route("{id}")]
         [HttpGet]
-        [SwaggerOperation(Summary = "Get existing configuration",
+        [SwaggerOperation(
             OperationId = "GetConfiguration",
-            Tags = new []{"Configuration"})]
-        [SwaggerResponse(200, "Configuration found", typeof(HealthCheckConfiguration))]
+            Tags = new[] {"Configuration"})]
+        [SwaggerResponse(200, "Configuration found", typeof(ConfigurationView))]
         public IActionResult GetConfiguration(Guid id)
         {
-            var response = _healthCheckConfigurationRepository.GetById(id);
+            var response = _configurationQueries.Get(id);
             if (response == null)
             {
                 return NotFound();
             }
 
             return Ok(response);
+        }
+
+        /// <summary>
+        /// Get a paged result of configurations
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [ActionName("GetPagedConfigurations")]
+        [SwaggerOperation(
+            OperationId = "GetPagedConfigurations",
+            Tags = new[] {"Configuration"})]
+        [SwaggerResponse(200, "Configurations found", typeof(List<ConfigurationView>))]
+        public IActionResult GetPagedConfigurations([FromQuery] PageParameters parameters)
+        {
+            return Ok(_configurationQueries.GetPagedConfigurations(parameters.PageNumber, parameters.PageSize));
         }
     }
 }

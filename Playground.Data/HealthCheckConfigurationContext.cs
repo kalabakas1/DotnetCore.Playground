@@ -18,7 +18,7 @@ namespace Playground.Data
         }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
-            optionsBuilder.UseSqlite("Data Source=C:\\Data\\Projects\\DotnetCore.Playground\\Playground.App\\Database.db");
+            optionsBuilder.UseSqlite(DataConstants.ConnectionString);
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -36,6 +36,7 @@ namespace Playground.Data
         {
             builder.ToTable("HealthCheckConfiguration"); 
             builder.HasKey(x => x.Id);
+            builder.Property(x => x.Name).IsRequired();
             builder.Property(x => x.Retries).IsRequired();
             builder.Property(x => x.SleepInMillsBetweenRetry).IsRequired();
             builder.HasMany(x => x.HealthChecks);

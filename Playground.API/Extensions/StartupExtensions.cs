@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Playground.API.Filters;
-using Playground.Application.Validators.Extensions;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -25,7 +24,6 @@ namespace Playground.API.Extensions
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 config.IncludeXmlComments(xmlPath);
                 config.AddFluentValidationRules();
-                config.SchemaFilter<SwaggerFluentValidation>(serviceCollection.BuildServiceProvider());
             });
             
             return serviceCollection;

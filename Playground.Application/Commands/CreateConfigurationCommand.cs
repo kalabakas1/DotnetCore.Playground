@@ -9,6 +9,7 @@ namespace Playground.Application.Commands
 {
     public class CreateConfigurationCommand : IRequest<Notification<Guid>>
     {
+        public string Name { get; set; }
         public int Retries { get; set; }
         public int SleepInMillsBetweenRetry { get; set; }
         public List<HealthCheckDto> HealthChecks { get; set; }

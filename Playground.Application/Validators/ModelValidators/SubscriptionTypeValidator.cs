@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using FluentValidation;
-using Playground.Application.Validators.Extensions;
 using Playground.Domain.Models.HealthChecks;
 
 namespace Playground.Application.Validators

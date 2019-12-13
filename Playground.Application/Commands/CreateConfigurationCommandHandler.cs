@@ -74,7 +74,7 @@ namespace Playground.Application.Commands
                     notification.AddError($"{ExceptionMessage.NoValueFound}: {nameof(request.SubscriptionTypeName)}");
                 }
 
-                var configuration = new HealthCheckConfiguration(request.Retries, request.SleepInMillsBetweenRetry,
+                var configuration = new HealthCheckConfiguration(request.Name, request.Retries, request.SleepInMillsBetweenRetry,
                     healthChecks, subscription);
 
                 if (!notification.HasError())

@@ -32,30 +32,10 @@ namespace Playground.Api.Client.Model
     public partial class CreateConfigurationCommand :  IEquatable<CreateConfigurationCommand>, IValidatableObject
     {
         /// <summary>
-        /// Defines SubscriptionTypeName
-        /// </summary>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum SubscriptionTypeNameEnum
-        {
-            /// <summary>
-            /// Enum LimitedHealthCheck for value: LimitedHealthCheck
-            /// </summary>
-            [EnumMember(Value = "LimitedHealthCheck")]
-            LimitedHealthCheck = 1,
-
-            /// <summary>
-            /// Enum TwoOfEach for value: TwoOfEach
-            /// </summary>
-            [EnumMember(Value = "TwoOfEach")]
-            TwoOfEach = 2
-
-        }
-
-        /// <summary>
         /// Gets or Sets SubscriptionTypeName
         /// </summary>
-        [DataMember(Name="subscriptionTypeName", EmitDefaultValue=true)]
-        public SubscriptionTypeNameEnum SubscriptionTypeName { get; set; }
+        [DataMember(Name="subscriptionTypeName", EmitDefaultValue=false)]
+        public SubscriptionTypes SubscriptionTypeName { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateConfigurationCommand" /> class.
         /// </summary>
@@ -64,12 +44,14 @@ namespace Playground.Api.Client.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateConfigurationCommand" /> class.
         /// </summary>
+        /// <param name="name">name (required).</param>
         /// <param name="retries">retries.</param>
         /// <param name="sleepInMillsBetweenRetry">sleepInMillsBetweenRetry.</param>
         /// <param name="healthChecks">healthChecks.</param>
         /// <param name="subscriptionTypeName">subscriptionTypeName (required).</param>
-        public CreateConfigurationCommand(int retries = default(int), int sleepInMillsBetweenRetry = default(int), List<HealthCheckDto> healthChecks = default(List<HealthCheckDto>), SubscriptionTypeNameEnum subscriptionTypeName = default(SubscriptionTypeNameEnum))
+        public CreateConfigurationCommand(string name = default(string), int retries = default(int), int sleepInMillsBetweenRetry = default(int), List<HealthCheckDto> healthChecks = default(List<HealthCheckDto>), SubscriptionTypes subscriptionTypeName = default(SubscriptionTypes))
         {
+            this.Name = name;
             this.HealthChecks = healthChecks;
             this.SubscriptionTypeName = subscriptionTypeName;
             this.Retries = retries;
@@ -77,6 +59,12 @@ namespace Playground.Api.Client.Model
             this.HealthChecks = healthChecks;
         }
         
+        /// <summary>
+        /// Gets or Sets Name
+        /// </summary>
+        [DataMember(Name="name", EmitDefaultValue=true)]
+        public string Name { get; set; }
+
         /// <summary>
         /// Gets or Sets Retries
         /// </summary>
@@ -103,6 +91,7 @@ namespace Playground.Api.Client.Model
         {
             var sb = new StringBuilder();
             sb.Append("class CreateConfigurationCommand {\n");
+            sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Retries: ").Append(Retries).Append("\n");
             sb.Append("  SleepInMillsBetweenRetry: ").Append(SleepInMillsBetweenRetry).Append("\n");
             sb.Append("  HealthChecks: ").Append(HealthChecks).Append("\n");
@@ -142,6 +131,11 @@ namespace Playground.Api.Client.Model
 
             return 
                 (
+                    this.Name == input.Name ||
+                    (this.Name != null &&
+                    this.Name.Equals(input.Name))
+                ) && 
+                (
                     this.Retries == input.Retries ||
                     this.Retries.Equals(input.Retries)
                 ) && 
@@ -170,6 +164,8 @@ namespace Playground.Api.Client.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                if (this.Name != null)
+                    hashCode = hashCode * 59 + this.Name.GetHashCode();
                 hashCode = hashCode * 59 + this.Retries.GetHashCode();
                 hashCode = hashCode * 59 + this.SleepInMillsBetweenRetry.GetHashCode();
                 if (this.HealthChecks != null)
@@ -186,6 +182,12 @@ namespace Playground.Api.Client.Model
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // Name (string) minLength
+            if(this.Name != null && this.Name.Length < 1)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Name, length must be greater than 1.", new [] { "Name" });
+            }
+
             // Retries (int) minimum
             if(this.Retries < (int)0)
             {

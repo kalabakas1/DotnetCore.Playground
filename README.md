@@ -48,6 +48,12 @@ of the execution of the tests
     * XML for the Domain
     * Blazor?
     
+## Notes
+* Commands to use:
+    * prism mock -d http://localhost:5000/swagger/v1/swagger.json
+* Missing stuff:
+    * Extend the API to return and handle mode entities - remember to use query models not domain models
+
 ## Status
 So I will try to keep a small series of updates so I know what have happened over the development of 
 the project. It should not be long, but long enough so I know the process:

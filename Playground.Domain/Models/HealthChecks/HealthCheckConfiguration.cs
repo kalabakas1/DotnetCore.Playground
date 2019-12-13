@@ -7,6 +7,7 @@ namespace Playground.Domain.Models.HealthChecks
     {
         public SubscriptionTypeAbstract SubscriptionType { get; set; }
         public DateTime CreatedOn { get; set; }
+        public string Name { get; set; }
         public List<HealthCheckAbstract> HealthChecks { get; set; }
         public int Retries { get; set; }
         public int SleepInMillsBetweenRetry { get; set; }
@@ -16,10 +17,11 @@ namespace Playground.Domain.Models.HealthChecks
             HealthChecks = new List<HealthCheckAbstract>();
         }
 
-        public HealthCheckConfiguration(int retries, int sleepInMillsBetweenRetry,
+        public HealthCheckConfiguration(string name, int retries, int sleepInMillsBetweenRetry,
             List<HealthCheckAbstract> healthChecks, SubscriptionTypeAbstract subscriptionType)
         {
             Id = Guid.NewGuid();
+            Name = name;
             CreatedOn = DateTime.Now;
             Retries = retries;
             SleepInMillsBetweenRetry = sleepInMillsBetweenRetry;
