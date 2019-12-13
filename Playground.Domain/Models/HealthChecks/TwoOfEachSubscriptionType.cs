@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Playground.Domain.Enums;
 
 namespace Playground.Domain.Models.HealthChecks
 {
@@ -11,7 +12,7 @@ namespace Playground.Domain.Models.HealthChecks
             Id = 2;
         }
 
-        public override string Type => "TwoOfEach";
+        public override SubscriptionTypes Type => SubscriptionTypes.TwoOfEach;
 
         public override bool CanAddNewHealthCheck(HealthCheckConfiguration configuration, HealthCheckAbstract healthCheck)
         {

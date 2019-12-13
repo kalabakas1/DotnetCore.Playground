@@ -8,12 +8,12 @@ namespace Playground.Domain.Models.HealthChecks
 {
     public class UrlPingHealthCheck : HealthCheckAbstract
     {
-        public UrlPingHealthCheck() : base(Constants.HealthChecks.UrlPing)
+        public UrlPingHealthCheck() : base(Enums.HealthChecks.UrlPing)
         {
             
         }
         
-        public UrlPingHealthCheck(string name, string path, int[] validResponses, Dictionary<string, string> headers) : base(Constants.HealthChecks.UrlPing, name)
+        public UrlPingHealthCheck(string name, string path, int[] validResponses, Dictionary<string, string> headers) : base(Enums.HealthChecks.UrlPing, name)
         {
             Path = path;
             ValidResponses = validResponses ?? new int[0];

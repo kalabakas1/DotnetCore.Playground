@@ -2,12 +2,13 @@
 using Playground.Domain.Dtos;
 using Playground.Domain.Models;
 using Playground.Domain.Models.HealthChecks;
+using HealthChecks = Playground.Domain.Enums.HealthChecks;
 
 namespace Playground.Domain.Factories
 {
     public abstract class HealthCheckBaseFactory : IHealthCheckFactory
     {
-        public abstract string Type { get; }
+        public abstract Enums.HealthChecks Type { get; }
 
         public Notification<HealthCheckAbstract> Create(HealthCheckDto configuration)
         {

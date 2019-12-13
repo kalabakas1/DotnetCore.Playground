@@ -12,18 +12,18 @@ namespace Playground.Domain.Models.HealthChecks
             
         }
 
-        protected HealthCheckAbstract(string alias)
+        protected HealthCheckAbstract(Enums.HealthChecks alias)
         {
             Alias = alias;
         }
 
-        protected HealthCheckAbstract(string alias, string name)
+        protected HealthCheckAbstract(Enums.HealthChecks alias, string name)
         {
             Alias = alias;
             Name = name;
         }
         
-        public string Alias { get; }
+        public Enums.HealthChecks Alias { get; }
         public string Name { get; }
         public Guid Id { get; set; }
 

@@ -1,8 +1,10 @@
-﻿namespace Playground.Domain.Models.HealthChecks
+﻿using Playground.Domain.Enums;
+
+namespace Playground.Domain.Models.HealthChecks
 {
     public abstract class SubscriptionTypeAbstract : AggregateBase<int>
     {
-        public abstract string Type { get; }
+        public abstract SubscriptionTypes Type { get; }
         protected SubscriptionTypeAbstract()
         {
             

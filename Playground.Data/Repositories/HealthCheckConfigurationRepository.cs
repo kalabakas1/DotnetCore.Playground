@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Playground.Domain.Enums;
 using Playground.Domain.Models.HealthChecks;
 using Playground.Domain.Repositories;
 
@@ -10,7 +11,6 @@ namespace Playground.Data.Repositories
     public class HealthCheckConfigurationRepository : IHealthCheckConfigurationRepository
     {
         private readonly HealthCheckConfigurationContext _context;
-        private readonly IEnumerable<HealthCheckAbstract> _healthCheckImplementations;
         private string[] _validHealthChecks;
 
         public HealthCheckConfigurationRepository(
@@ -18,13 +18,13 @@ namespace Playground.Data.Repositories
             IEnumerable<HealthCheckAbstract> healthCheckImplementations)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
-            _healthCheckImplementations = healthCheckImplementations;
-            _validHealthChecks = _healthCheckImplementations.Select(x => x.Alias).ToArray();
+            _validHealthChecks = healthCheckImplementations.Select(x => x.Alias.ToString()).ToArray();
         }
         public HealthCheckConfiguration GetById(Guid id)
         {
             var configuration = _context.HealthCheckConfigurations
-                .Include(x => x.HealthChecks)    
+                .Include(x => x.HealthChecks)  
+                .Include(x => x.SubscriptionType)
                 .FirstOrDefault(x => x.Id.Equals(id));
 
             if (configuration == null)
@@ -33,7 +33,7 @@ namespace Playground.Data.Repositories
             }
             
             configuration.HealthChecks =
-                configuration.HealthChecks.Where(x => _validHealthChecks.Contains(x.Alias)).ToList();
+                configuration.HealthChecks.Where(x => _validHealthChecks.Contains(x.Alias.ToString())).ToList();
             
             return configuration;
         }
