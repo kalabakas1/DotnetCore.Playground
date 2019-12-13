@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Playground.API.Filters;
+using Playground.Application.Validators.Extensions;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -18,13 +19,13 @@ namespace Playground.API.Extensions
         {
             serviceCollection.AddSwaggerGen(config =>
             {
-                config.SwaggerDoc("v1", new OpenApiInfo {Title = "My API", Version = "v1"});
+                config.SwaggerDoc("v1", new OpenApiInfo {Title = "My API", Version = "1.0"});
                 
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 config.IncludeXmlComments(xmlPath);
-                
                 config.AddFluentValidationRules();
+                config.SchemaFilter<SwaggerFluentValidation>(serviceCollection.BuildServiceProvider());
             });
             
             return serviceCollection;

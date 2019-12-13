@@ -12,6 +12,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Application", "P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.BlazorServerApp", "Playground.BlazorServerApp\Playground.BlazorServerApp.csproj", "{38C75FF8-2D97-4272-8CFB-1753E4BAF827}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.API.Client", "Playground.API.Client\Playground.API.Client.csproj", "{9ED0C19E-5904-4A69-909F-36DC7482B723}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{A1406FCB-4B1B-412C-98AD-16DA93E7989A}"
+ProjectSection(SolutionItems) = preProject
+	README.md = README.md
+EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "openapi-generator", "openapi-generator", "{E43B5633-E1F1-4F71-A460-E80203FFE7FB}"
+ProjectSection(SolutionItems) = preProject
+	openapi-generator\Generate-Api-Client.ps1 = openapi-generator\Generate-Api-Client.ps1
+	openapi-generator\Generate-Client.ps1 = openapi-generator\Generate-Client.ps1
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +55,12 @@ Global
 		{38C75FF8-2D97-4272-8CFB-1753E4BAF827}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38C75FF8-2D97-4272-8CFB-1753E4BAF827}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38C75FF8-2D97-4272-8CFB-1753E4BAF827}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9ED0C19E-5904-4A69-909F-36DC7482B723}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ED0C19E-5904-4A69-909F-36DC7482B723}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ED0C19E-5904-4A69-909F-36DC7482B723}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ED0C19E-5904-4A69-909F-36DC7482B723}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E43B5633-E1F1-4F71-A460-E80203FFE7FB} = {A1406FCB-4B1B-412C-98AD-16DA93E7989A}
 	EndGlobalSection
 EndGlobal

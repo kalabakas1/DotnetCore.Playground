@@ -2,12 +2,12 @@
 {
     public class DefaultHealthCheck : HealthCheckAbstract
     {
-        public DefaultHealthCheck() : base(Constants.HealthChecks.Default)
+        public DefaultHealthCheck() : base(Enums.HealthChecks.Default)
         {
             
         }
         
-        public DefaultHealthCheck(string name) : base(Constants.HealthChecks.Default, name)
+        public DefaultHealthCheck(string name) : base(Enums.HealthChecks.Default, name)
         {
             
         }

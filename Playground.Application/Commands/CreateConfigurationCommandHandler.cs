@@ -68,7 +68,7 @@ namespace Playground.Application.Commands
                 }
 
                 var subscription = _subscriptionTypeAbstracts.FirstOrDefault(x =>
-                    x.Type.Equals(request.SubscriptionTypeName, StringComparison.InvariantCultureIgnoreCase));
+                    x.Type == request.SubscriptionTypeName);
                 if (subscription == null)
                 {
                     notification.AddError($"{ExceptionMessage.NoValueFound}: {nameof(request.SubscriptionTypeName)}");

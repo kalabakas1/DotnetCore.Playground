@@ -1,4 +1,6 @@
-﻿namespace Playground.Domain.Models.HealthChecks
+﻿using Playground.Domain.Enums;
+
+namespace Playground.Domain.Models.HealthChecks
 {
     public class LimitedHealthCheckSubscriptionType : SubscriptionTypeAbstract
     {
@@ -9,7 +11,7 @@
 
         private const int MaxChecks = 3;
 
-        public override string Type => "LimitedHealthCheck";
+        public override SubscriptionTypes Type => SubscriptionTypes.LimitedHealthCheck;
 
         public override bool CanAddNewHealthCheck(HealthCheckConfiguration configuration, HealthCheckAbstract healthCheck)
         {

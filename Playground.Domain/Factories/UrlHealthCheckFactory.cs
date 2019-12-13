@@ -9,7 +9,7 @@ namespace Playground.Domain.Factories
 {
     public class UrlHealthCheckFactory : HealthCheckBaseFactory, IHealthCheckFactory
     {
-        public override string Type => HealthChecks.UrlPing;
+        public override Enums.HealthChecks Type => Enums.HealthChecks.UrlPing;
 
         public new Notification<HealthCheckAbstract> Create(HealthCheckDto configuration)
         {
