@@ -19,7 +19,7 @@ namespace Playground.API.Extensions
         {
             serviceCollection.AddSwaggerGen(config =>
             {
-                config.SwaggerDoc("v1", new OpenApiInfo {Title = "My API", Version = "v1"});
+                config.SwaggerDoc("v1", new OpenApiInfo {Title = "My API", Version = "1.0"});
                 
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);

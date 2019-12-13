@@ -6,6 +6,8 @@ This project should be used to learn the following concepts to some level:
 * DotNet Core ASP.Net
 * Blazor
 * Documentation of functionality
+* FluentValidation
+* MediatR
 
 This is at least the idea and vision. It will not be correct, and it will always be changing 
 according to the things i learn through books and articles. 
@@ -45,3 +47,37 @@ of the execution of the tests
     * Swagger for API
     * XML for the Domain
     * Blazor?
+    
+## Status
+So I will try to keep a small series of updates so I know what have happened over the development of 
+the project. It should not be long, but long enough so I know the process:
+
+### Status 2019-12-13
+So I'm currently home having a cold, so I guess it's okay to write this small update.
+The state is currently that I have defined a small domain where you can have a user, on a user there 
+should be a list of configurations that each have a list of health-checks attached to it. At
+the same time the configuration should associates with a subscription-type that defines 
+how many health-checks you are allowed to have.
+   
+On top of that it can persist to a SqLite database for both the configuration, checks and subscription types.
+
+All this is accessible through a API (currently only containing one POST method - more to come). The
+API it self has setup to use FluentValidation that enables me to define validation in a different
+class than through attributes directly in the model itself. Very handy btw.  
+All of this is readable in a Swashbuckle swagger endpoint, where the FluentValidation rules is 
+integrated into as well.
+
+The communication between the API and the domain is handled through the use of commands in the form 
+of the MediatR library. I'm currently not sure if it actually is a kind of CQRS, but I guess its
+a form of that pattern - more to come.
+
+By using the openapi-generator nodejs tool I were able to create two very simple scripts for 
+generating a Client project in the solution Playground.Api.Client. That basically just hooks up
+to the swagger.json endpoint and generates working C# dotnet code based directly on the swagger feed.
+
+That way I don't have to maintain the client code too much.
+
+The Idea is that in the future a Blazor Server application will communicate with the API based
+on the generated API client code and don't directly depend on the other projects. It needs to 
+be hidden behind an interface in the Blazor implementation so it can be switched out later if 
+need be.  
