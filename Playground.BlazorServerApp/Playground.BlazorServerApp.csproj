@@ -8,4 +8,8 @@
     <ProjectReference Include="..\Playground.API.Client\Playground.API.Client.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Components\ConfigurationList.razor" />
+  </ItemGroup>
+
 </Project>

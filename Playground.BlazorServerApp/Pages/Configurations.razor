@@ -1,0 +1,23 @@
+﻿@page "/configurations"
+
+<div class="row">
+    <div class="col-md-4">
+        <h3>Configurations</h3>
+        <ConfigurationList OnConfigurationSelection="ConfigurationSelected"/>
+    </div>
+    <div class="col-md-4">
+        <h3>Checks</h3>
+        <HealthCheckList ConfigurationId="@Id"/>
+    </div>
+</div>
+
+@code{
+
+    public Guid Id { get; set; }
+
+    void ConfigurationSelected(Guid id)
+    {
+        Id = id;
+    }
+
+}

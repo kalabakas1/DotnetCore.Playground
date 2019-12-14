@@ -1,0 +1,45 @@
+﻿@using Playground.BlazorServerApp.Data
+@using Playground.BlazorServerApp.Data.ViewDtos
+
+@inject ConfigurationService ConfigurationService
+
+
+<div class="col-md-12">
+    @if (configurations == null || !configurations.Any())
+    {
+        <p>
+            <strong>No configurations in API...</strong>
+        </p>
+    }
+    else
+    {
+        <div class="list-group">
+            @foreach (var config in configurations)
+            {
+                var id = config.Id;
+                <a class="list-group-item list-group-item-action flex-column align-items-start" @onclick="@(() => OnConfigurationSelection.InvokeAsync(id))">
+                       <div class="d-flex w-100 justify-content-between">
+                           <h5 class="mb-1">@config.Name</h5>
+                           <small>@config.CreatedOn</small>
+                       </div>
+                       <small>@config.Id</small>
+                   </a>
+            }
+                   </div>
+    }
+                   </div>
+
+
+                   @code{
+
+                       [Parameter]
+                       public EventCallback<Guid> OnConfigurationSelection { get; set; }
+
+                       private ConfigurationDto[] configurations;
+
+                       protected override async Task OnInitializedAsync()
+                       {
+                           configurations = await ConfigurationService.GetConfigurationsAsync();
+                       }
+
+                   }

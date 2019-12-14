@@ -9,6 +9,7 @@ namespace Playground.Application.Queries
     public class ConfigurationQueries : DbContext, IConfigurationQueries
     {
         private DbSet<ConfigurationView> Configurations { get; set; }
+        private DbSet<HealthCheckViewModel> HealthChecks { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder.UseSqlite(DataConstants.ConnectionString);
@@ -44,6 +45,18 @@ namespace Playground.Application.Queries
             JOIN HealthCheck hc ON hcc.Id = hc.HealthCheckConfigurationId
             GROUP BY
             hcc.Id, hcc.Name, hcc.CreatedOn, hcc.Retries, hcc.SleepInMillsBetweenRetry").Skip(pageNumber * pageSize).Take(pageSize);
+        }
+
+        public IEnumerable<HealthCheckViewModel> GetChecksByConfiguration(Guid id)
+        {
+            return HealthChecks.FromSqlRaw($@"
+                SELECT 
+                Id
+                , Name
+                , Path
+                , Alias
+                FROM HealthCheck 
+                WHERE HealthCheckConfigurationId = '{id.ToString().ToUpperInvariant()}'");
         }
     }
 }

@@ -7,5 +7,6 @@ namespace Playground.Application.Queries
     {
         ConfigurationView Get(Guid id);
         IEnumerable<ConfigurationView> GetPagedConfigurations(int pageNumber, int pageSize);
+        IEnumerable<HealthCheckViewModel> GetChecksByConfiguration(Guid id);
     }
 }

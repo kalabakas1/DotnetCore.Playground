@@ -1,0 +1,41 @@
+﻿@using Playground.BlazorServerApp.Data
+@using Playground.BlazorServerApp.Data.ViewDtos
+@inject ConfigurationService ConfigurationService
+
+<div class="row">
+    <div class="col-md-12">
+        @if (HealthCheckDtos == null || !HealthCheckDtos.Any())
+        {
+            <p>
+                <strong>No healthchecks in API...</strong>
+            </p>
+        }
+        else
+        {
+            <div class="list-group">
+                @foreach (var healthCheckDto in HealthCheckDtos)
+                {
+                    <a class="list-group-item list-group-item-action flex-column align-items-start">
+                           <div class="d-flex w-100 justify-content-between">
+                               <h5 class="mb-1">@healthCheckDto.Name</h5>
+                           </div>
+                           <small>@healthCheckDto.Type</small>
+                       </a>
+                }
+                       </div>
+        }
+                       </div>
+                       </div>
+
+@code{
+
+    [Parameter]
+    public Guid ConfigurationId { get; set; }
+    private List<HealthCheckDto> HealthCheckDtos;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        HealthCheckDtos = await ConfigurationService.GetHealthChecks(ConfigurationId);
+    }
+
+}

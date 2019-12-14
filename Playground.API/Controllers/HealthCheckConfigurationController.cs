@@ -97,5 +97,16 @@ namespace Playground.API.Controllers
         {
             return Ok(_configurationQueries.GetPagedConfigurations(parameters.PageNumber, parameters.PageSize));
         }
+
+        [HttpGet]
+        [Route("{id}/checks")]
+        [SwaggerOperation(
+            OperationId = "GetChecks",
+            Tags =  new []{"Checks"})]
+        [SwaggerResponse(200, "Checks found", typeof(List<HealthCheckViewModel>))]
+        public IActionResult GetChecks(Guid id)
+        {
+            return Ok(_configurationQueries.GetChecksByConfiguration(id));
+        }
     }
 }

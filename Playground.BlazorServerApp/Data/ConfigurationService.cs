@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Playground.Api.Client.Api;
@@ -39,6 +40,21 @@ namespace Playground.BlazorServerApp.Data
                     CreatedOn = configuration.CreatedOn,
                     HealthCheckCount = configuration.HealthCheckCount
                 };
+            });
+        }
+
+        public Task<List<HealthCheckDto>> GetHealthChecks(Guid id)
+        {
+            return Task.Run(() =>
+            {
+                var configuration = _service.ApiConfigurationIdChecksGet(id);
+                return configuration.Select(x => new HealthCheckDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Type = x.Type,
+                    Path = x.Path
+                }).ToList();
             });
         }
     }
