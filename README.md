@@ -1,6 +1,8 @@
 # DotnetCore.Playground
 This project should be used to learn the following concepts to some level:
 
+TLDR;
+
 * Domain Driven Design
 * DotNet Core 3.0
 * DotNet Core ASP.Net
@@ -57,6 +59,21 @@ of the execution of the tests
 ## Status
 So I will try to keep a small series of updates so I know what have happened over the development of 
 the project. It should not be long, but long enough so I know the process:
+
+### Status 2019-12-18
+So to make this example work more fluently I decided to add a modal functionality. At this time there 
+were already a package on the web, but to make this about learning I decided to follow an old tutorial:
+
+    https://www.telerik.com/blogs/creating-a-reusable-javascript-free-blazor-modal
+
+This sort of displays what I want to do. At click on a button, render a form component in an modal/overlay.
+Basically it is working, but I had to convert it to 3.1 instead of what ever version it were made in.
+dotnet keeps changing. 
+
+This also got to work, and the key here is that you need to register the events by calling the component
+on the main layout. If that is not done, you wont be able to render the modal because of missing event and
+action registrations - a frontend kind of dependency registration. I will see if I cant refactor this to 
+something else that are more fluent.
 
 ### Status 2019-12-13
 So I'm currently home having a cold, so I guess it's okay to write this small update.

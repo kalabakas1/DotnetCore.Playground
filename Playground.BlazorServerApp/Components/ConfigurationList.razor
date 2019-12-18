@@ -1,7 +1,9 @@
 ﻿@using Playground.BlazorServerApp.Data
 @using Playground.BlazorServerApp.Data.ViewDtos
+@using Playground.BlazorServerApp.Services
 
 @inject ConfigurationService ConfigurationService
+@inject ModalService ModalService
 
 
 <div class="col-md-12">
@@ -17,29 +19,30 @@
             @foreach (var config in configurations)
             {
                 var id = config.Id;
-                <a class="list-group-item list-group-item-action flex-column align-items-start" @onclick="@(() => OnConfigurationSelection.InvokeAsync(id))">
-                       <div class="d-flex w-100 justify-content-between">
-                           <h5 class="mb-1">@config.Name</h5>
-                           <small>@config.CreatedOn</small>
-                       </div>
-                       <small>@config.Id</small>
-                   </a>
+                <a class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1" @onclick="@(() => OnConfigurationSelection.InvokeAsync(id))">@config.Name</h5>
+                            <button class="btn btn-sm btn-primary float-right" @onclick="@(() => ModalService.Show<EditConfiguration>("Edit Configuration", new ModalParameters().Add(nameof(EditConfiguration.Id), id)))">Edit</button>
+                            </div>
+                            <small>@config.Id</small>
+                            <small>@config.CreatedOn</small>
+                                    </a>
             }
-                   </div>
+        </div>
     }
-                   </div>
+</div>
 
 
-                   @code{
+@code{
 
-                       [Parameter]
-                       public EventCallback<Guid> OnConfigurationSelection { get; set; }
+    [Parameter]
+    public EventCallback<Guid> OnConfigurationSelection { get; set; }
 
-                       private ConfigurationDto[] configurations;
+    private ConfigurationDto[] configurations;
 
-                       protected override async Task OnInitializedAsync()
-                       {
-                           configurations = await ConfigurationService.GetConfigurationsAsync();
-                       }
+    protected override async Task OnInitializedAsync()
+    {
+        configurations = await ConfigurationService.GetConfigurationsAsync();
+    }
 
-                   }
+}

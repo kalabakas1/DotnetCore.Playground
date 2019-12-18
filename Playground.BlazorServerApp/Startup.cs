@@ -9,7 +9,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Playground.BlazorServerApp.Components;
 using Playground.BlazorServerApp.Data;
+using Playground.BlazorServerApp.Services;
 
 namespace Playground.BlazorServerApp
 {
@@ -30,6 +32,7 @@ namespace Playground.BlazorServerApp
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
             services.AddSingleton<ConfigurationService>();
+            services.AddScoped<ModalService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

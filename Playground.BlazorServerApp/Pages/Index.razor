@@ -1,5 +1,25 @@
 ﻿@page "/"
+@using Playground.BlazorServerApp.Services
+
+@inject ModalService ModalService
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+
+<TestComponent RandomText="MainRandomText" />
+
+<button @onclick="@(() => ModalService.Show<TestComponent>("Test", Parameters))">Show Modal</button>
+
+@code
+{
+
+    public ModalParameters Parameters { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Parameters = new ModalParameters();
+        Parameters.Add(nameof(TestComponent.RandomText), "RandomText");
+    }
+
+}

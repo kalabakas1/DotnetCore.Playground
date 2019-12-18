@@ -1,0 +1,55 @@
+﻿@using Playground.BlazorServerApp.Data
+@using Playground.BlazorServerApp.Data.ViewDtos
+@using Playground.BlazorServerApp.Services
+
+@inject ConfigurationService ConfigurationService;
+
+<EditForm Model="@Configuration" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    
+    <div class="form-group">
+        <label for="@(nameof(Configuration.Id))">Id</label>
+        <input type="text" value="@(Configuration.Id)" class="form-control" disabled/>
+    </div>
+
+    <div class="form-group">
+        <label for="@(nameof(Configuration.CreatedOn))">Date of creation</label>
+        <input type="datetime" value="@(Configuration.CreatedOn)" class="form-control" disabled/>
+    </div>
+
+    <div class="form-group">
+        <label for="@(nameof(Configuration.HealthCheckCount))">Current count of checks</label>
+        <input type="number" value="@(Configuration.HealthCheckCount)" class="form-control" disabled />
+    </div>
+
+    <div class="form-group">
+        <label for="@(nameof(Configuration.Name))">Name</label>
+        <InputText id="@(nameof(Configuration.Name))" @bind-Value="Configuration.Name" class="form-control"/>
+    </div>
+    <button type="submit" class="btn btn-success float-right">Submit</button>
+</EditForm>
+
+@code{
+
+    [CascadingParameter]
+    public ModalParameters Parameters { get; set; }
+    
+    [Parameter]
+    public Guid Id { get; set; }
+
+    ConfigurationDto Configuration { get; set; } = new ConfigurationDto();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        Parameters.SetValues(this);
+        
+        Configuration = await ConfigurationService.GetConfiguration(Id);
+    }
+
+    private void HandleValidSubmit()
+    {
+        
+    }
+
+}

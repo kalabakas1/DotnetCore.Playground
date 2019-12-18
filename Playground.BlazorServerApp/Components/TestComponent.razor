@@ -1,1 +1,20 @@
-﻿<h1>TEST</h1>
+﻿@using Playground.BlazorServerApp.Services
+@inject ModalService ModalService
+
+
+<h1>TEST - @RandomText</h1>
+
+@code{
+    
+    [Parameter]
+    public string RandomText { get; set; }
+
+    [CascadingParameter]
+    public ModalParameters Parameters { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Parameters?.SetValues(this);
+    }
+
+}
