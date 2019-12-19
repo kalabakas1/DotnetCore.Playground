@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Playground.Api.Client.Api;
-using Playground.BlazorServerApp.Data.ViewDtos;
+using Playground.Api.Client.Model;
 
 namespace Playground.BlazorServerApp.Data
 {
@@ -12,49 +12,31 @@ namespace Playground.BlazorServerApp.Data
         private const string ApiPath = "http://localhost:5000";
         private HealthCheckConfigurationApi _service = new HealthCheckConfigurationApi(ApiPath);
 
-        public Task<ConfigurationDto[]> GetConfigurationsAsync()
+        public Task<ConfigurationView[]> GetConfigurationsAsync()
         {
             return Task.Run(() =>
             {
                 var configurations = _service.ApiConfigurationGet(0, 200);
 
-                return configurations.Select(x => new ConfigurationDto
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    CreatedOn = x.CreatedOn,
-                    HealthCheckCount = x.HealthCheckCount
-                }).ToArray();
+                return configurations.ToArray();
             });
         }
 
-        public Task<ConfigurationDto> GetConfiguration(Guid id)
+        public Task<ConfigurationView> GetConfiguration(Guid id)
         {
             return Task.Run(() =>
             {
                 var configuration = _service.ApiConfigurationIdGet(id);
-                return new ConfigurationDto
-                {
-                    Id = configuration.Id,
-                    Name = configuration.Name,
-                    CreatedOn = configuration.CreatedOn,
-                    HealthCheckCount = configuration.HealthCheckCount
-                };
+                return configuration;
             });
         }
 
-        public Task<List<HealthCheckDto>> GetHealthChecks(Guid id)
+        public Task<List<HealthCheckViewModel>> GetHealthChecks(Guid id)
         {
             return Task.Run(() =>
             {
                 var configuration = _service.ApiConfigurationIdChecksGet(id);
-                return configuration.Select(x => new HealthCheckDto
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    Type = x.Type,
-                    Path = x.Path
-                }).ToList();
+                return configuration;
             });
         }
     }

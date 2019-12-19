@@ -1,5 +1,5 @@
-﻿@using Playground.BlazorServerApp.Data
-@using Playground.BlazorServerApp.Data.ViewDtos
+﻿@using Playground.Api.Client.Model
+@using Playground.BlazorServerApp.Data
 @inject ConfigurationService ConfigurationService
 
 <div class="row">
@@ -31,7 +31,7 @@
 
     [Parameter]
     public Guid ConfigurationId { get; set; }
-    private List<HealthCheckDto> HealthCheckDtos;
+    private List<HealthCheckViewModel> HealthCheckDtos;
 
     protected override async Task OnParametersSetAsync()
     {

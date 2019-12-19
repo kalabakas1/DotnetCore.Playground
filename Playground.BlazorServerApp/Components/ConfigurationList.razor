@@ -1,5 +1,5 @@
-﻿@using Playground.BlazorServerApp.Data
-@using Playground.BlazorServerApp.Data.ViewDtos
+﻿@using Playground.Api.Client.Model
+@using Playground.BlazorServerApp.Data
 @using Playground.BlazorServerApp.Services
 
 @inject ConfigurationService ConfigurationService
@@ -38,7 +38,7 @@
     [Parameter]
     public EventCallback<Guid> OnConfigurationSelection { get; set; }
 
-    private ConfigurationDto[] configurations;
+    private ConfigurationView[] configurations;
 
     protected override async Task OnInitializedAsync()
     {
