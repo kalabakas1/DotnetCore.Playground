@@ -16,6 +16,21 @@
     <Compile Update="Components\Modal.razor.cs">
       <DependentUpon>Modal.razor</DependentUpon>
     </Compile>
+    <Compile Update="Components\ConfigurationList.razor.cs">
+      <DependentUpon>ConfigurationList.razor</DependentUpon>
+    </Compile>
+    <Compile Update="Components\EditConfiguration.razor.cs">
+      <DependentUpon>EditConfiguration.razor</DependentUpon>
+    </Compile>
+    <Compile Update="Components\FormAlerts.razor.cs">
+      <DependentUpon>FormAlerts.razor</DependentUpon>
+    </Compile>
+    <Compile Update="Components\HealthCheckList.razor.cs">
+      <DependentUpon>HealthCheckList.razor</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Configurations.razor.cs">
+      <DependentUpon>Configurations.razor</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

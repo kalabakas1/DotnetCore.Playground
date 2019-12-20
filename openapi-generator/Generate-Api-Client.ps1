@@ -8,7 +8,7 @@ cd ..\$apiProjectName
 Start-Process dotnet run
 cd ..\openapi-generator
 
-Start-Sleep -Seconds 5
+Start-Sleep -Seconds 10
 
 $swaggerResponse = Invoke-WebRequest $swaggerPath
 

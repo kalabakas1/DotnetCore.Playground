@@ -1,0 +1,22 @@
+﻿@using Playground.BlazorServerApp.Enums
+@if (State != FormStates.Init && (Texts?.ContainsKey(State) ?? false))
+{
+    var message = Texts[State];
+    var cssClass = "alert-light";
+    switch (State)
+    {
+        case FormStates.Success:
+            cssClass = "alert-success";
+            break;
+        case FormStates.Failed:
+            cssClass = "alert-danger";
+            break;
+        case FormStates.Warning:
+            cssClass = "alert-warning";
+            break;
+    }
+    
+    <div class="alert @cssClass" role="alert">
+        @message
+    </div>
+}

@@ -11,10 +11,20 @@ namespace Playground.API.Extensions
     {
         internal static HttpError  ToHttpError<T>(this Notification<T> notification, HttpStatusCode statusCode)
         {
+            return ToHttpError(statusCode, notification.Errors);
+        }
+        
+        internal static HttpError  ToHttpError(this Notification notification, HttpStatusCode statusCode)
+        {
+            return ToHttpError(statusCode, notification.Errors);
+        }
+
+        private static HttpError ToHttpError(HttpStatusCode statusCode, List<Notification.Error> errors)
+        {
             var error = new HttpError
             {
                 StatusCode = (int)statusCode,
-                Messages = notification.Errors?.Select(x => x.Message).ToList()
+                Messages = errors?.Select(x => x.Message).ToList()
             };
 
             return error;

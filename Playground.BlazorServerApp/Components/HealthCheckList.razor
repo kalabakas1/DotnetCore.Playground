@@ -1,8 +1,4 @@
-﻿@using Playground.Api.Client.Model
-@using Playground.BlazorServerApp.Data
-@inject ConfigurationService ConfigurationService
-
-<div class="row">
+﻿<div class="row">
     <div class="col-md-12">
         @if (HealthCheckDtos == null || !HealthCheckDtos.Any())
         {
@@ -19,23 +15,10 @@
                            <div class="d-flex w-100 justify-content-between">
                                <h5 class="mb-1">@healthCheckDto.Name</h5>
                            </div>
-                           <small>@healthCheckDto.Type</small>
+                           <small>@healthCheckDto.Alias</small>
                        </a>
                 }
-                       </div>
+            </div>
         }
-                       </div>
-                       </div>
-
-@code{
-
-    [Parameter]
-    public Guid ConfigurationId { get; set; }
-    private List<HealthCheckViewModel> HealthCheckDtos;
-
-    protected override async Task OnParametersSetAsync()
-    {
-        HealthCheckDtos = await ConfigurationService.GetHealthChecks(ConfigurationId);
-    }
-
-}
+    </div>
+</div>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Playground.Api.Client.Api;
 using Playground.Api.Client.Model;
@@ -37,6 +38,28 @@ namespace Playground.BlazorServerApp.Data
             {
                 var configuration = _service.ApiConfigurationIdChecksGet(id);
                 return configuration;
+            });
+        }
+
+        public Task<bool> UpdateConfiguration(ConfigurationView configurationView)
+        {
+            return Task.Run(() =>
+            {
+                try
+                {
+                    var response = _service.ApiConfigurationIdPatchAsyncWithHttpInfo(configurationView.Id.ToString().ToUpperInvariant(),
+                        new UpdateConfigurationCommand
+                        {
+                            Id = configurationView.Id,
+                            Name = configurationView.Name
+                        }).Result;
+
+                    return response.StatusCode == HttpStatusCode.OK;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
             });
         }
     }

@@ -55,6 +55,8 @@ of the execution of the tests
     * prism mock -d http://localhost:5000/swagger/v1/swagger.json
 * Missing stuff:
     * Extend the API to return and handle mode entities - remember to use query models not domain models
+* Refactor error messages to be aliases and not actual strings
+    * Make a language repository/service
 
 ## Status
 So I will try to keep a small series of updates so I know what have happened over the development of 

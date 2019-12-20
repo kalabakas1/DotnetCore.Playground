@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Playground.BlazorServerApp.Services
 {
@@ -46,6 +47,11 @@ namespace Playground.BlazorServerApp.Services
             {
                 type?.GetProperty(item.Key)?.SetValue(obj, item.Value, null);
             }
+        }
+
+        public bool Any()
+        {
+            return _parameters.Any();
         }
     }
 }

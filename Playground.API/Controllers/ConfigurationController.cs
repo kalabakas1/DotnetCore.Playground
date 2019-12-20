@@ -19,12 +19,12 @@ namespace Playground.API.Controllers
 {
     [ApiController]
     [Microsoft.AspNetCore.Mvc.Route("api/Configuration")]
-    public class HealthCheckConfigurationController : Controller
+    public class ConfigurationController : Controller
     {
         private readonly IMediator _mediator;
         private readonly IConfigurationQueries _configurationQueries;
 
-        public HealthCheckConfigurationController(
+        public ConfigurationController(
             IMediator mediator,
             IConfigurationQueries configurationQueries)
         {
@@ -45,6 +45,8 @@ namespace Playground.API.Controllers
             OperationId = "CreateConfiguration",
             Tags = new[] {"Configuration"})]
         [SwaggerResponse(200, "Configuration created", typeof(Guid))]
+        [SwaggerResponse(400, "Updated failed", typeof(HttpError))]
+        [ActionName("CreateConfiguration")]
         public IActionResult CreateConfiguration([FromBody] CreateConfigurationCommand request)
         {
             var response = _mediator.Send(request).Result;
@@ -54,6 +56,28 @@ namespace Playground.API.Controllers
             }
 
             return Ok(response.Value);
+        }
+
+
+        [HttpPost]
+        [SwaggerOperation(
+            OperationId = "UpdateConfiguration",
+            Tags = new[] {"Configuration"})]
+        [HttpPatch]
+        [ActionName("UpdateConfiguration")]
+        [SwaggerResponse(200)]
+        [SwaggerResponse(400, "Updated failed", typeof(HttpError))]
+        [Route("{id}")]
+        public IActionResult UpdateConfiguration([FromBody] UpdateConfigurationCommand request)
+        {
+            var response = _mediator.Send(request).Result;
+
+            if (response.HasError())
+            {
+                return BadRequest(response.ToHttpError(HttpStatusCode.BadRequest));
+            }
+
+            return Ok();
         }
 
         //ToDo: Redo this to return a query object (not domain)
@@ -96,17 +120,6 @@ namespace Playground.API.Controllers
         public IActionResult GetPagedConfigurations([FromQuery] PageParameters parameters)
         {
             return Ok(_configurationQueries.GetPagedConfigurations(parameters.PageNumber, parameters.PageSize));
-        }
-
-        [HttpGet]
-        [Route("{id}/checks")]
-        [SwaggerOperation(
-            OperationId = "GetChecks",
-            Tags =  new []{"Checks"})]
-        [SwaggerResponse(200, "Checks found", typeof(List<HealthCheckViewModel>))]
-        public IActionResult GetChecks(Guid id)
-        {
-            return Ok(_configurationQueries.GetChecksByConfiguration(id));
         }
     }
 }

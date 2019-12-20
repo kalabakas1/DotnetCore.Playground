@@ -24,7 +24,7 @@ namespace Playground.Api.Client.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public interface IHealthCheckConfigurationApiSync : IApiAccessor
+    public interface IConfigurationApiSync : IApiAccessor
     {
         #region Synchronous Operations
         /// <summary>
@@ -50,27 +50,6 @@ namespace Playground.Api.Client.Api
         /// <param name="pageSize"> (optional)</param>
         /// <returns>ApiResponse of List&lt;ConfigurationView&gt;</returns>
         ApiResponse<List<ConfigurationView>> ApiConfigurationGetWithHttpInfo (int? pageNumber = default(int?), int? pageSize = default(int?));
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id"></param>
-        /// <returns>List&lt;HealthCheckViewModel&gt;</returns>
-        List<HealthCheckViewModel> ApiConfigurationIdChecksGet (Guid id);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id"></param>
-        /// <returns>ApiResponse of List&lt;HealthCheckViewModel&gt;</returns>
-        ApiResponse<List<HealthCheckViewModel>> ApiConfigurationIdChecksGetWithHttpInfo (Guid id);
         /// <summary>
         /// Get configuration
         /// </summary>
@@ -165,7 +144,7 @@ namespace Playground.Api.Client.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public interface IHealthCheckConfigurationApiAsync : IApiAccessor
+    public interface IConfigurationApiAsync : IApiAccessor
     {
         #region Asynchronous Operations
         /// <summary>
@@ -191,27 +170,6 @@ namespace Playground.Api.Client.Api
         /// <param name="pageSize"> (optional)</param>
         /// <returns>Task of ApiResponse (List&lt;ConfigurationView&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<ConfigurationView>>> ApiConfigurationGetAsyncWithHttpInfo (int? pageNumber = default(int?), int? pageSize = default(int?));
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id"></param>
-        /// <returns>Task of List&lt;HealthCheckViewModel&gt;</returns>
-        System.Threading.Tasks.Task<List<HealthCheckViewModel>> ApiConfigurationIdChecksGetAsync (Guid id);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id"></param>
-        /// <returns>Task of ApiResponse (List&lt;HealthCheckViewModel&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<HealthCheckViewModel>>> ApiConfigurationIdChecksGetAsyncWithHttpInfo (Guid id);
         /// <summary>
         /// Get configuration
         /// </summary>
@@ -306,7 +264,7 @@ namespace Playground.Api.Client.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public interface IHealthCheckConfigurationApi : IHealthCheckConfigurationApiSync, IHealthCheckConfigurationApiAsync
+    public interface IConfigurationApi : IConfigurationApiSync, IConfigurationApiAsync
     {
 
     }
@@ -314,23 +272,23 @@ namespace Playground.Api.Client.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public partial class HealthCheckConfigurationApi : IHealthCheckConfigurationApi
+    public partial class ConfigurationApi : IConfigurationApi
     {
         private Playground.Api.Client.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HealthCheckConfigurationApi"/> class.
+        /// Initializes a new instance of the <see cref="ConfigurationApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public HealthCheckConfigurationApi() : this((string) null)
+        public ConfigurationApi() : this((string) null)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HealthCheckConfigurationApi"/> class.
+        /// Initializes a new instance of the <see cref="ConfigurationApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public HealthCheckConfigurationApi(String basePath)
+        public ConfigurationApi(String basePath)
         {
             this.Configuration = Playground.Api.Client.Client.Configuration.MergeConfigurations(
                 Playground.Api.Client.Client.GlobalConfiguration.Instance,
@@ -342,12 +300,12 @@ namespace Playground.Api.Client.Api
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HealthCheckConfigurationApi"/> class
+        /// Initializes a new instance of the <see cref="ConfigurationApi"/> class
         /// using Configuration object
         /// </summary>
         /// <param name="configuration">An instance of Configuration</param>
         /// <returns></returns>
-        public HealthCheckConfigurationApi(Playground.Api.Client.Client.Configuration configuration)
+        public ConfigurationApi(Playground.Api.Client.Client.Configuration configuration)
         {
             if (configuration == null) throw new ArgumentNullException("configuration");
 
@@ -361,13 +319,13 @@ namespace Playground.Api.Client.Api
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HealthCheckConfigurationApi"/> class
+        /// Initializes a new instance of the <see cref="ConfigurationApi"/> class
         /// using a Configuration object and client instance.
         /// </summary>
         /// <param name="client">The client interface for synchronous API access.</param>
         /// <param name="asyncClient">The client interface for asynchronous API access.</param>
         /// <param name="configuration">The configuration object.</param>
-        public HealthCheckConfigurationApi(Playground.Api.Client.Client.ISynchronousClient client,Playground.Api.Client.Client.IAsynchronousClient asyncClient, Playground.Api.Client.Client.IReadableConfiguration configuration)
+        public ConfigurationApi(Playground.Api.Client.Client.ISynchronousClient client,Playground.Api.Client.Client.IAsynchronousClient asyncClient, Playground.Api.Client.Client.IReadableConfiguration configuration)
         {
             if(client == null) throw new ArgumentNullException("client");
             if(asyncClient == null) throw new ArgumentNullException("asyncClient");
@@ -572,125 +530,6 @@ namespace Playground.Api.Client.Api
         }
 
         /// <summary>
-        ///  
-        /// </summary>
-        /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id"></param>
-        /// <returns>List&lt;HealthCheckViewModel&gt;</returns>
-        public List<HealthCheckViewModel> ApiConfigurationIdChecksGet (Guid id)
-        {
-             Playground.Api.Client.Client.ApiResponse<List<HealthCheckViewModel>> localVarResponse = ApiConfigurationIdChecksGetWithHttpInfo(id);
-             return localVarResponse.Data;
-        }
-
-        /// <summary>
-        ///  
-        /// </summary>
-        /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id"></param>
-        /// <returns>ApiResponse of List&lt;HealthCheckViewModel&gt;</returns>
-        public Playground.Api.Client.Client.ApiResponse< List<HealthCheckViewModel> > ApiConfigurationIdChecksGetWithHttpInfo (Guid id)
-        {
-            // verify the required parameter 'id' is set
-            if (id == null)
-                throw new Playground.Api.Client.Client.ApiException(400, "Missing required parameter 'id' when calling HealthCheckConfigurationApi->ApiConfigurationIdChecksGet");
-
-            Playground.Api.Client.Client.RequestOptions localVarRequestOptions = new Playground.Api.Client.Client.RequestOptions();
-
-            String[] _contentTypes = new String[] {
-            };
-
-            // to determine the Accept header
-            String[] _accepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-
-            var localVarContentType = Playground.Api.Client.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-            var localVarAccept = Playground.Api.Client.Client.ClientUtils.SelectHeaderAccept(_accepts);
-            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-            if (id != null)
-                localVarRequestOptions.PathParameters.Add("id", Playground.Api.Client.Client.ClientUtils.ParameterToString(id)); // path parameter
-
-
-            // make the HTTP request
-            var localVarResponse = this.Client.Get< List<HealthCheckViewModel> >("/api/Configuration/{id}/checks", localVarRequestOptions, this.Configuration);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception _exception = this.ExceptionFactory("ApiConfigurationIdChecksGet", localVarResponse);
-                if (_exception != null) throw _exception;
-            }
-
-            return localVarResponse;
-        }
-
-        /// <summary>
-        ///  
-        /// </summary>
-        /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id"></param>
-        /// <returns>Task of List&lt;HealthCheckViewModel&gt;</returns>
-        public async System.Threading.Tasks.Task<List<HealthCheckViewModel>> ApiConfigurationIdChecksGetAsync (Guid id)
-        {
-             Playground.Api.Client.Client.ApiResponse<List<HealthCheckViewModel>> localVarResponse = await ApiConfigurationIdChecksGetAsyncWithHttpInfo(id);
-             return localVarResponse.Data;
-
-        }
-
-        /// <summary>
-        ///  
-        /// </summary>
-        /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id"></param>
-        /// <returns>Task of ApiResponse (List&lt;HealthCheckViewModel&gt;)</returns>
-        public async System.Threading.Tasks.Task<Playground.Api.Client.Client.ApiResponse<List<HealthCheckViewModel>>> ApiConfigurationIdChecksGetAsyncWithHttpInfo (Guid id)
-        {
-            // verify the required parameter 'id' is set
-            if (id == null)
-                throw new Playground.Api.Client.Client.ApiException(400, "Missing required parameter 'id' when calling HealthCheckConfigurationApi->ApiConfigurationIdChecksGet");
-
-
-            Playground.Api.Client.Client.RequestOptions localVarRequestOptions = new Playground.Api.Client.Client.RequestOptions();
-
-            String[] _contentTypes = new String[] {
-            };
-
-            // to determine the Accept header
-            String[] _accepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            
-            foreach (var _contentType in _contentTypes)
-                localVarRequestOptions.HeaderParameters.Add("Content-Type", _contentType);
-            
-            foreach (var _accept in _accepts)
-                localVarRequestOptions.HeaderParameters.Add("Accept", _accept);
-            
-            if (id != null)
-                localVarRequestOptions.PathParameters.Add("id", Playground.Api.Client.Client.ClientUtils.ParameterToString(id)); // path parameter
-
-
-            // make the HTTP request
-
-            var localVarResponse = await this.AsynchronousClient.GetAsync<List<HealthCheckViewModel>>("/api/Configuration/{id}/checks", localVarRequestOptions, this.Configuration);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception _exception = this.ExceptionFactory("ApiConfigurationIdChecksGet", localVarResponse);
-                if (_exception != null) throw _exception;
-            }
-
-            return localVarResponse;
-        }
-
-        /// <summary>
         /// Get configuration Gets the configuration by the GUID id returned at creation
         /// </summary>
         /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
@@ -712,7 +551,7 @@ namespace Playground.Api.Client.Api
         {
             // verify the required parameter 'id' is set
             if (id == null)
-                throw new Playground.Api.Client.Client.ApiException(400, "Missing required parameter 'id' when calling HealthCheckConfigurationApi->ApiConfigurationIdGet");
+                throw new Playground.Api.Client.Client.ApiException(400, "Missing required parameter 'id' when calling ConfigurationApi->ApiConfigurationIdGet");
 
             Playground.Api.Client.Client.RequestOptions localVarRequestOptions = new Playground.Api.Client.Client.RequestOptions();
 
@@ -771,7 +610,7 @@ namespace Playground.Api.Client.Api
         {
             // verify the required parameter 'id' is set
             if (id == null)
-                throw new Playground.Api.Client.Client.ApiException(400, "Missing required parameter 'id' when calling HealthCheckConfigurationApi->ApiConfigurationIdGet");
+                throw new Playground.Api.Client.Client.ApiException(400, "Missing required parameter 'id' when calling ConfigurationApi->ApiConfigurationIdGet");
 
 
             Playground.Api.Client.Client.RequestOptions localVarRequestOptions = new Playground.Api.Client.Client.RequestOptions();
@@ -832,7 +671,7 @@ namespace Playground.Api.Client.Api
         {
             // verify the required parameter 'id' is set
             if (id == null)
-                throw new Playground.Api.Client.Client.ApiException(400, "Missing required parameter 'id' when calling HealthCheckConfigurationApi->ApiConfigurationIdPatch");
+                throw new Playground.Api.Client.Client.ApiException(400, "Missing required parameter 'id' when calling ConfigurationApi->ApiConfigurationIdPatch");
 
             Playground.Api.Client.Client.RequestOptions localVarRequestOptions = new Playground.Api.Client.Client.RequestOptions();
 
@@ -897,7 +736,7 @@ namespace Playground.Api.Client.Api
         {
             // verify the required parameter 'id' is set
             if (id == null)
-                throw new Playground.Api.Client.Client.ApiException(400, "Missing required parameter 'id' when calling HealthCheckConfigurationApi->ApiConfigurationIdPatch");
+                throw new Playground.Api.Client.Client.ApiException(400, "Missing required parameter 'id' when calling ConfigurationApi->ApiConfigurationIdPatch");
 
 
             Playground.Api.Client.Client.RequestOptions localVarRequestOptions = new Playground.Api.Client.Client.RequestOptions();
@@ -963,7 +802,7 @@ namespace Playground.Api.Client.Api
         {
             // verify the required parameter 'id' is set
             if (id == null)
-                throw new Playground.Api.Client.Client.ApiException(400, "Missing required parameter 'id' when calling HealthCheckConfigurationApi->ApiConfigurationIdPost");
+                throw new Playground.Api.Client.Client.ApiException(400, "Missing required parameter 'id' when calling ConfigurationApi->ApiConfigurationIdPost");
 
             Playground.Api.Client.Client.RequestOptions localVarRequestOptions = new Playground.Api.Client.Client.RequestOptions();
 
@@ -1028,7 +867,7 @@ namespace Playground.Api.Client.Api
         {
             // verify the required parameter 'id' is set
             if (id == null)
-                throw new Playground.Api.Client.Client.ApiException(400, "Missing required parameter 'id' when calling HealthCheckConfigurationApi->ApiConfigurationIdPost");
+                throw new Playground.Api.Client.Client.ApiException(400, "Missing required parameter 'id' when calling ConfigurationApi->ApiConfigurationIdPost");
 
 
             Playground.Api.Client.Client.RequestOptions localVarRequestOptions = new Playground.Api.Client.Client.RequestOptions();

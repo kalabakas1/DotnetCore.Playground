@@ -1,12 +1,7 @@
-﻿@using Playground.Api.Client.Model
-@using Playground.BlazorServerApp.Data
-@using Playground.BlazorServerApp.Services
+﻿<FormAlerts State="@State" Texts="@_alertMessages" />
 
-@inject ConfigurationService ConfigurationService;
-
-<EditForm Model="@Configuration" OnValidSubmit="@HandleValidSubmit">
+<EditForm Model="@Configuration" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit" >
     <DataAnnotationsValidator />
-    <ValidationSummary />
     
     <div class="form-group">
         <label for="@(nameof(Configuration.Id))">Id</label>
@@ -26,30 +21,7 @@
     <div class="form-group">
         <label for="@(nameof(Configuration.Name))">Name</label>
         <InputText id="@(nameof(Configuration.Name))" @bind-Value="Configuration.Name" class="form-control"/>
+        <ValidationMessage For="@(() => Configuration.Name)" />
     </div>
     <button type="submit" class="btn btn-success float-right">Submit</button>
 </EditForm>
-
-@code{
-
-    [CascadingParameter]
-    public ModalParameters Parameters { get; set; }
-    
-    [Parameter]
-    public Guid Id { get; set; }
-
-    ConfigurationView Configuration { get; set; } = new ConfigurationView();
-    
-    protected override async Task OnInitializedAsync()
-    {
-        Parameters.SetValues(this);
-        
-        Configuration = await ConfigurationService.GetConfiguration(Id);
-    }
-
-    private void HandleValidSubmit()
-    {
-        
-    }
-
-}

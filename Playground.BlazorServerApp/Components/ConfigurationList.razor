@@ -1,10 +1,4 @@
-﻿@using Playground.Api.Client.Model
-@using Playground.BlazorServerApp.Data
-@using Playground.BlazorServerApp.Services
-
-@inject ConfigurationService ConfigurationService
-@inject ModalService ModalService
-
+﻿@using Playground.BlazorServerApp.Services
 
 <div class="col-md-12">
     @if (configurations == null || !configurations.Any())
@@ -21,28 +15,16 @@
                 var id = config.Id;
                 <a class="list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1" @onclick="@(() => OnConfigurationSelection.InvokeAsync(id))">@config.Name</h5>
-                            <button class="btn btn-sm btn-primary float-right" @onclick="@(() => ModalService.Show<EditConfiguration>("Edit Configuration", new ModalParameters().Add(nameof(EditConfiguration.Id), id)))">Edit</button>
-                            </div>
-                            <small>@config.Id</small>
-                            <small>@config.CreatedOn</small>
-                                    </a>
+                        <h5 class="mb-1" @onclick="@(() => OnConfigurationSelection.InvokeAsync(id))" style="cursor: pointer;">@config.Name</h5>
+                        <button class="btn btn-sm btn-primary float-right" 
+                            @onclick="@(() => ModalService.Show<EditConfiguration>("Edit Configuration", new ModalParameters().Add(nameof(EditConfiguration.Id), id)))">
+                            Edit
+                        </button>
+                    </div>
+                    <small>@config.Id</small> <br />
+                    <small>@config.CreatedOn</small>
+                </a>
             }
         </div>
     }
 </div>
-
-
-@code{
-
-    [Parameter]
-    public EventCallback<Guid> OnConfigurationSelection { get; set; }
-
-    private ConfigurationView[] configurations;
-
-    protected override async Task OnInitializedAsync()
-    {
-        configurations = await ConfigurationService.GetConfigurationsAsync();
-    }
-
-}

@@ -26,31 +26,21 @@ using OpenAPIDateConverter = Playground.Api.Client.Client.OpenAPIDateConverter;
 namespace Playground.Api.Client.Model
 {
     /// <summary>
-    /// HealthCheckViewModel
+    /// UpdateConfigurationCommand
     /// </summary>
     [DataContract]
-    public partial class HealthCheckViewModel :  IEquatable<HealthCheckViewModel>, IValidatableObject
+    public partial class UpdateConfigurationCommand :  IEquatable<UpdateConfigurationCommand>, IValidatableObject
     {
         /// <summary>
-        /// Gets or Sets Alias
-        /// </summary>
-        [DataMember(Name="alias", EmitDefaultValue=false)]
-        public HealthChecks? Alias { get; set; }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="HealthCheckViewModel" /> class.
+        /// Initializes a new instance of the <see cref="UpdateConfigurationCommand" /> class.
         /// </summary>
         /// <param name="id">id.</param>
         /// <param name="name">name.</param>
-        /// <param name="path">path.</param>
-        /// <param name="alias">alias.</param>
-        public HealthCheckViewModel(Guid id = default(Guid), string name = default(string), string path = default(string), HealthChecks alias = default(HealthChecks))
+        public UpdateConfigurationCommand(Guid id = default(Guid), string name = default(string))
         {
             this.Name = name;
-            this.Path = path;
             this.Id = id;
             this.Name = name;
-            this.Path = path;
-            this.Alias = alias;
         }
         
         /// <summary>
@@ -66,23 +56,15 @@ namespace Playground.Api.Client.Model
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or Sets Path
-        /// </summary>
-        [DataMember(Name="path", EmitDefaultValue=true)]
-        public string Path { get; set; }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class HealthCheckViewModel {\n");
+            sb.Append("class UpdateConfigurationCommand {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
-            sb.Append("  Path: ").Append(Path).Append("\n");
-            sb.Append("  Alias: ").Append(Alias).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -103,15 +85,15 @@ namespace Playground.Api.Client.Model
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as HealthCheckViewModel);
+            return this.Equals(input as UpdateConfigurationCommand);
         }
 
         /// <summary>
-        /// Returns true if HealthCheckViewModel instances are equal
+        /// Returns true if UpdateConfigurationCommand instances are equal
         /// </summary>
-        /// <param name="input">Instance of HealthCheckViewModel to be compared</param>
+        /// <param name="input">Instance of UpdateConfigurationCommand to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(HealthCheckViewModel input)
+        public bool Equals(UpdateConfigurationCommand input)
         {
             if (input == null)
                 return false;
@@ -126,15 +108,6 @@ namespace Playground.Api.Client.Model
                     this.Name == input.Name ||
                     (this.Name != null &&
                     this.Name.Equals(input.Name))
-                ) && 
-                (
-                    this.Path == input.Path ||
-                    (this.Path != null &&
-                    this.Path.Equals(input.Path))
-                ) && 
-                (
-                    this.Alias == input.Alias ||
-                    this.Alias.Equals(input.Alias)
                 );
         }
 
@@ -151,9 +124,6 @@ namespace Playground.Api.Client.Model
                     hashCode = hashCode * 59 + this.Id.GetHashCode();
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
-                if (this.Path != null)
-                    hashCode = hashCode * 59 + this.Path.GetHashCode();
-                hashCode = hashCode * 59 + this.Alias.GetHashCode();
                 return hashCode;
             }
         }

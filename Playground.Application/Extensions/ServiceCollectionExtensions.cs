@@ -16,6 +16,7 @@ namespace Playground.Application.Extensions
         {
             return collection.AddMediatR(Assembly.GetExecutingAssembly())
                 .AddTransient<IValidator<CreateConfigurationCommand>, CreateConfigurationCommandValidator>()
+                
                 .AddTransient<IConfigurationQueries, ConfigurationQueries>()
                 
                 .AddTransient<IValidator<HealthCheckDto>, HealthCheckDtoValidator>()
