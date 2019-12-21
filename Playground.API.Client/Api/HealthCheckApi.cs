@@ -28,7 +28,7 @@ namespace Playground.Api.Client.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// 
+        /// Get the health checks associated with a configuration id
         /// </summary>
         /// <remarks>
         /// 
@@ -39,7 +39,7 @@ namespace Playground.Api.Client.Api
         List<HealthCheckViewModel> ApiConfigurationIdChecksGet (Guid id);
 
         /// <summary>
-        /// 
+        /// Get the health checks associated with a configuration id
         /// </summary>
         /// <remarks>
         /// 
@@ -58,7 +58,7 @@ namespace Playground.Api.Client.Api
     {
         #region Asynchronous Operations
         /// <summary>
-        /// 
+        /// Get the health checks associated with a configuration id
         /// </summary>
         /// <remarks>
         /// 
@@ -69,7 +69,7 @@ namespace Playground.Api.Client.Api
         System.Threading.Tasks.Task<List<HealthCheckViewModel>> ApiConfigurationIdChecksGetAsync (Guid id);
 
         /// <summary>
-        /// 
+        /// Get the health checks associated with a configuration id
         /// </summary>
         /// <remarks>
         /// 
@@ -199,7 +199,7 @@ namespace Playground.Api.Client.Api
         }
 
         /// <summary>
-        ///  
+        /// Get the health checks associated with a configuration id 
         /// </summary>
         /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
@@ -211,7 +211,7 @@ namespace Playground.Api.Client.Api
         }
 
         /// <summary>
-        ///  
+        /// Get the health checks associated with a configuration id 
         /// </summary>
         /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
@@ -245,7 +245,7 @@ namespace Playground.Api.Client.Api
 
 
             // make the HTTP request
-            var localVarResponse = this.Client.Get< List<HealthCheckViewModel> >("/api/Configuration/{id}/checks", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Get< List<HealthCheckViewModel> >("/api/Configuration/{id}/Checks", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
@@ -257,7 +257,7 @@ namespace Playground.Api.Client.Api
         }
 
         /// <summary>
-        ///  
+        /// Get the health checks associated with a configuration id 
         /// </summary>
         /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
@@ -270,7 +270,7 @@ namespace Playground.Api.Client.Api
         }
 
         /// <summary>
-        ///  
+        /// Get the health checks associated with a configuration id 
         /// </summary>
         /// <exception cref="Playground.Api.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id"></param>
@@ -306,7 +306,7 @@ namespace Playground.Api.Client.Api
 
             // make the HTTP request
 
-            var localVarResponse = await this.AsynchronousClient.GetAsync<List<HealthCheckViewModel>>("/api/Configuration/{id}/checks", localVarRequestOptions, this.Configuration);
+            var localVarResponse = await this.AsynchronousClient.GetAsync<List<HealthCheckViewModel>>("/api/Configuration/{id}/Checks", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {

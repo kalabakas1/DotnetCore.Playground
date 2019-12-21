@@ -30,7 +30,6 @@ namespace Playground.BlazorServerApp
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
             services.AddSingleton<ConfigurationService>();
             services.AddScoped<ModalService>();
         }
